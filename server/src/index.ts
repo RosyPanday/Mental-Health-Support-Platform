@@ -3,14 +3,19 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
 import { userDefs } from './graphql/userDefs';
+import { userResolvers } from './graphql/userResolvers'; // 
+import { connectDB } from './db'; // 
 
 async function startServer() {
   const app = express();
   
+  // Database Connect गर्ने (SQLite Database सुचारु हुन्छ)
+  await connectDB();
+  
   // Apollo GraphQL Server Setup
   const server = new ApolloServer({
     typeDefs: userDefs,
-    resolvers: {}, // resolvers खाली भए पनि root code चल्छ
+    resolvers: userResolvers, // ३. यहाँ खाली {} लाई हटाएर userResolvers राखियो
   });
 
   await server.start();
