@@ -1,0 +1,94 @@
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+
+import { jwtSecret } from "@src/config/index.js";
+import { Database } from "@src/database/connection.js";
+import { RoleEnum } from "@src/enums/roleEnum.js";
+import type { InputSignupInterface, signupResponseInterface } from "#src/interfaces/authInterface.js";
+import {
+  UserRepository,
+  PatientRepository,
+  TherapistRepository,
+} from "@src/repositories/index.js";
+
+export class AuthService {
+  private userRepository: UserRepository;
+  private patientRepository: PatientRepository;
+  private therapistRepository: TherapistRepository;
+
+  constructor() {
+    this.userRepository = new UserRepository();
+    this.patientRepository = new PatientRepository();
+    this.therapistRepository = new TherapistRepository();
+  }
+
+  public async validateUniqueFields(
+    username: string,
+    email: string,
+    phoneNumber: string,
+  ): Promise<void> {
+    const [existingEmail, existingUsername, existingPhone] = await Promise.all([
+      this.userRepository.findByEmail(email),
+      this.userRepository.findByUsername(username),
+      this.userRepository.findByPhoneNumber(phoneNumber),
+    ]);
+    if (existingUsername) {
+      throw new Error("username is already taken.");
+    }
+    if (existingEmail) {
+      throw new Error("Email belongs to another user.");
+    }
+    if (existingPhone) {
+      throw new Error("Contact number belongs to another user.");
+    }
+  }
+
+  public async signup(input: InputSignupInterface):Promise<{token:string,userId:number}> {
+    let userId;
+    const hashedPassword= await bcrypt.hash(input.password,10);
+    await Database.sequelize.transaction(async (transaction) => {
+      const user = await this.userRepository.create(
+        {
+          username: input.username,
+          password:hashedPassword,
+          phoneNumber: input.phoneNumber,
+          role: input.role,
+        },
+        { transaction: transaction },
+      );
+      input.role === RoleEnum.patient
+        ? await this.patientRepository.create(
+            {
+              userId: user.id,
+              name: input.name,
+              language: input.language,
+            },
+            { transaction: transaction },
+          )
+        : await this.therapistRepository.create(
+            {
+              userId: user.id,
+              name: input.name,
+              language: input.language,
+              educationDegree: input.educationDegree,
+              specialization: input.specialization,
+              yearsOfExperience: input.yearsOfExperience,
+            },
+            { transaction: transaction },
+          );
+      userId = user.id;
+    });
+    //token creation
+    const token = jwt.sign(
+      {
+        id: userId,
+        role: input.role,
+      },
+      jwtSecret,
+      {
+        expiresIn: "1d", // Token expiration time setup
+      },
+    );
+    return {token:token, userId:userId!};
+  }
+}
