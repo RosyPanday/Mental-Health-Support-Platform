@@ -1,6 +1,6 @@
 import * as Sequelize from "sequelize";
 
-import { Database } from "@src/database/connection.js";
+import { Database } from "#src/database/connection.js";
 import type { PatientModelInterface } from "#src/interfaces/patientInterface.js";
 import User from "./user.js";
 

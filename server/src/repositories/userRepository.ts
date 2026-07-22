@@ -1,6 +1,6 @@
 import type { InputSignupInterface } from "#src/interfaces/authInterface.js";
 import { BaseRepository } from "./baseRepository.js";
-import Model from "@src/models/index.js";
+import Model from "#src/models/index.js";
 import type { UserModelInterface } from "#src/interfaces/userInterface.js";
 
 export class UserRepository extends BaseRepository<

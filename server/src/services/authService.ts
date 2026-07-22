@@ -1,15 +1,18 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-import { jwtSecret } from "@src/config/index.js";
-import { Database } from "@src/database/connection.js";
-import { RoleEnum } from "@src/enums/roleEnum.js";
-import type { InputSignupInterface, signupResponseInterface } from "#src/interfaces/authInterface.js";
+import { jwtSecret } from "#src/config/index.js";
+import { Database } from "#src/database/connection.js";
+import { RoleEnum } from "#src/enums/roleEnum.js";
+import type {
+  InputLoginInterface,
+  InputSignupInterface,
+} from "#src/interfaces/authInterface.js";
 import {
-  UserRepository,
   PatientRepository,
   TherapistRepository,
-} from "@src/repositories/index.js";
+  UserRepository,
+} from "#src/repositories/index.js";
 
 export class AuthService {
   private userRepository: UserRepository;
@@ -43,14 +46,16 @@ export class AuthService {
     }
   }
 
-  public async signup(input: InputSignupInterface):Promise<{token:string,userId:number}> {
+  public async signup(
+    input: InputSignupInterface,
+  ): Promise<{ token: string; userId: number }> {
     let userId;
-    const hashedPassword= await bcrypt.hash(input.password,10);
+    const hashedPassword = await bcrypt.hash(input.password, 10);
     await Database.sequelize.transaction(async (transaction) => {
       const user = await this.userRepository.create(
         {
           username: input.username,
-          password:hashedPassword,
+          password: hashedPassword,
           phoneNumber: input.phoneNumber,
           role: input.role,
         },
@@ -89,6 +94,40 @@ export class AuthService {
         expiresIn: "1d", // Token expiration time setup
       },
     );
-    return {token:token, userId:userId!};
+    return { token: token, userId: userId! };
+  }
+
+  public async checkLoginCredentials(
+    input: InputLoginInterface,
+  ): Promise<{ token: string; userId: number }> {
+    const existingUser = await this.userRepository.findOne({
+      where: {
+        username: input.username,
+      },
+    });
+    if (!existingUser) {
+      throw new Error("Please signup before logging in.");
+    }
+    if (existingUser.role !== input.role) {
+      throw new Error(`User has not signed up ${input.role}`);
+    }
+    const isPasswordMatched = await bcrypt.compare(
+      input.password,
+      existingUser.password,
+    );
+    if (!isPasswordMatched) {
+      throw new Error("Incorrect username or password");
+    }
+    const token = jwt.sign(
+      {
+        id: existingUser.id,
+        role: existingUser.role,
+      },
+      jwtSecret,
+      {
+        expiresIn: "1d",
+      },
+    );
+    return { token, userId: existingUser.id };
   }
 }

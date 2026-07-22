@@ -9,7 +9,7 @@ import type {
   UpsertOptions
 } from "sequelize/types/model";
 
-import {Database} from "@src/database/connection.js";
+import {Database} from "#src/database/connection.js";
 
 interface RepositoryWriter<IT, RT> {
   create(input: Partial<IT>, options?: CreateOptions): Promise<RT>;

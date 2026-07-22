@@ -3,41 +3,47 @@ import { gql } from "graphql-tag";
 
 export const authDefs: DocumentNode = gql`
   #graphql
-  enum UserRole{
+  enum UserRole {
     patient
     therapist
   }
   type User {
-    id:ID
+    id: ID
     username: String
     name: String
     phoneNumber: String
-    role:UserRole
+    role: UserRole
   }
-  type SignupData{
-    token:String
-    user:User
+  type SignupData {
+    token: String
+    user: User
   }
   type SignupResponse {
-    message:String
+    message: String
     data: SignupData
   }
-  input InputSignup{
-    username:String
-    name:String
-    phoneNumber:String
-    role:String
-    password:String
-    email:String
-    language:String
-    yearsOfExperience:Int
-    educationDegree:String
-    specialization:String
+  input InputSignup {
+    username: String
+    name: String
+    phoneNumber: String
+    role: String
+    password: String
+    email: String
+    language: String
+    yearsOfExperience: Int
+    educationDegree: String
+    specialization: String
     # confirmPassword:String
+  }
+  input InputLogin {
+    username: String
+    password:String
+    role: String
   }
   # extend type Query {
   # }
   type Mutation {
     signup(input: InputSignup): SignupResponse
+    login(input: InputLogin): SignupResponse
   }
 `;

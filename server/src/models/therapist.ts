@@ -1,7 +1,7 @@
 import * as Sequelize from "sequelize";
 
-import { Database } from "@src/database/connection.js";
-import type { TherapistModelInterface } from "@src/interfaces/therapistInterface.js";
+import { Database } from "#src/database/connection.js";
+import type { TherapistModelInterface } from "#src/interfaces/therapistInterface.js";
 import User from "./user.js";
 
 const sequelize = Database.sequelize;
