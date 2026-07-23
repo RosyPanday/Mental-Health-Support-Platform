@@ -1,0 +1,30 @@
+import type { RoleEnum } from "@src/enums/roleEnum.js";
+
+export interface InputSignupInterface {
+  id?: number;
+  userId?: number | undefined;
+  username: string;
+  phoneNumber: string;
+  role: RoleEnum;
+  password: string;
+  email: string;
+  name: string;
+  language: string;
+  educationDegree?: string | undefined;
+  specialization?: string | undefined;
+  yearsOfExperience?: string | undefined;
+  createdAt?: Date;
+  upadtedAt?: Date;
+  deletedAt?: Date;
+  // confirmPassword: string;
+}
+
+export interface User {
+  id:number;
+  username: string;
+  role: string;
+}
+export interface signupResponseInterface {
+  token: string;
+  user: User;
+}
