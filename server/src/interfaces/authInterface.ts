@@ -19,12 +19,18 @@ export interface InputSignupInterface {
   // confirmPassword: string;
 }
 
+export interface InputLoginInterface {
+  username: string;
+  password:string;
+  role: string;
+}
+
 export interface User {
-  id:number;
+  id: number;
   username: string;
   role: string;
 }
-export interface signupResponseInterface {
+export interface SignupLoginResponseInterface {
   token: string;
   user: User;
 }

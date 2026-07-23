@@ -1,12 +1,13 @@
 import type { ContextInterface } from "#src/interfaces/contextHandlerInterface.js";
 import type {
+  InputLoginInterface,
   InputSignupInterface,
-  signupResponseInterface,
+  SignupLoginResponseInterface,
 } from "#src/interfaces/authInterface.js";
-import { AuthService } from "@src/services/authService.js";
-import { Validator } from "@src/middleware/validator.js";
-import { signupSchema } from "@src/validators/authValidator.js";
-import { GraphqlResponse } from "@src/utils/graphqlResponse.js";
+import { AuthService } from "#src/services/authService.js";
+import { Validator } from "#src/middleware/validator.js";
+import { loginSchema, signupSchema } from "#src/validators/authValidator.js";
+import { GraphqlResponse } from "#src/utils/graphqlResponse.js";
 
 export const authResolver = {
   Mutation: {
@@ -23,7 +24,7 @@ export const authResolver = {
       );
       Validator.check(signupSchema, args.input);
       const result = await authService.signup(args.input);
-      return GraphqlResponse.send<signupResponseInterface>({
+      return GraphqlResponse.send<SignupLoginResponseInterface>({
         message: "User successfully signedup.",
         data: {
           token: result.token,
@@ -36,6 +37,24 @@ export const authResolver = {
       });
     },
 
-    //next mutation
+    login: async (
+      parent: ParentNode,
+      args: { input: InputLoginInterface },
+      contextValue: ContextInterface,
+    ) => {
+      Validator.check(loginSchema, args.input);
+      const result = await new AuthService().checkLoginCredentials(args.input);
+      return GraphqlResponse.send<SignupLoginResponseInterface>({
+        message: "User logged in successfully",
+        data: {
+          token: result.token,
+          user: {
+            id: result.userId,
+            username: args.input.username,
+            role: args.input.role,
+          },
+        },
+      });
+    },
   },
 };

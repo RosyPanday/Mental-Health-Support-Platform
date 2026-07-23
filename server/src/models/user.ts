@@ -1,7 +1,7 @@
 import * as Sequelize from "sequelize";
 
-import { Database } from "@src/database/connection.js";
-import { RoleEnum } from "@src/enums/roleEnum.js";
+import { Database } from "#src/database/connection.js";
+import { RoleEnum } from "#src/enums/roleEnum.js";
 import type { UserModelInterface } from "#src/interfaces/userInterface.js";
 
 const sequelize = Database.sequelize;

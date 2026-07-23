@@ -2,7 +2,7 @@ import Joi from "joi";
 import { alternativeSchema, numberSchema, stringSchema } from "./schemas.js";
 
 const baseSignupFields = {
-  username: stringSchema.label("Username").trim().required(),
+  username: stringSchema.min(3).max(30).label("Username").trim().required(),
   password: stringSchema.label("Password").trim().required(),
   phoneNumber: stringSchema.label("Phone Number").trim().required(),
   email: stringSchema.label("Email Address").trim().required(),
@@ -31,4 +31,9 @@ const signupSchema = alternativeSchema.conditional(
   },
 );
 
-export { signupSchema };
+const loginSchema = Joi.object({
+  username: stringSchema.label("username").min(3).max(30).required(),
+  password: stringSchema.label("password").required(),
+  role: stringSchema.label("role").valid("therapist", "patient").required(),
+});
+export { signupSchema, loginSchema };
