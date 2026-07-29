@@ -26,7 +26,7 @@ module.exports = {
       },
       language: {
         type: Sequelize.STRING,
-        allowNull: true, // Left as optional (nullable) matching your model config
+        allowNull: true, 
       },
       created_at: {
         type: Sequelize.DATE,

@@ -1,5 +1,10 @@
 import type { NextFunction, Request, Response } from "express";
-import type { AlternativesSchema, ArraySchema, ObjectSchema, StringSchema } from "joi";
+import type {
+  AlternativesSchema,
+  ArraySchema,
+  ObjectSchema,
+  StringSchema,
+} from "joi";
 
 class Validator {
   private static instance: Validator;
@@ -14,7 +19,7 @@ class Validator {
   }
 
   public check = (
-    schema: ObjectSchema | ArraySchema | StringSchema|AlternativesSchema,
+    schema: ObjectSchema | ArraySchema | StringSchema | AlternativesSchema,
     input: unknown,
   ) => {
     const { error } = schema.validate(input, { abortEarly: false });
