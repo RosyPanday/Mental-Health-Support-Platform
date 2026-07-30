@@ -10,15 +10,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "users",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE", // If User is hard-deleted, their results is automatically hard-deleted too
-      },
       patient_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

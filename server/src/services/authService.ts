@@ -97,7 +97,7 @@ export class AuthService {
     return { token: token, userId: userId! };
   }
 
-  public async checkLoginCredentials(
+  public async checkLoginCredentialsAndSignToken(
     input: InputLoginInterface,
   ): Promise<{ token: string; userId: number }> {
     const existingUser = await this.userRepository.findOne({

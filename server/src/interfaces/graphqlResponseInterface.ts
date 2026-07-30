@@ -1,12 +1,14 @@
 export interface GraphqlResponseParamsInterface<T> {
-    message: string;
-    data?: T;
+  message: string;
+  data?: T;
 }
 
 export interface GraphqlMessageResponseInterface {
-    message: string;
+  message: string;
 }
 
-export interface GraphqlResponseInterface<T> extends GraphqlMessageResponseInterface {
-    data?: T;
+export interface GraphqlResponseInterface<
+  T,
+> extends GraphqlMessageResponseInterface {
+  data?: T;
 }

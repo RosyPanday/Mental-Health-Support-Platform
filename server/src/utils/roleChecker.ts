@@ -5,7 +5,7 @@ export const requireRole = (
   allowedRoles: RoleEnum[],
 ) => {
   if (!userRole) {
-    throw new Error("Forbidden: Improper token recieved");
+    throw new Error("Forbidden: Improper token recieved/unauthorized user");
   }
   if (!allowedRoles.includes(userRole as RoleEnum)) {
     throw new Error("Forbidden: Permission Denied ");

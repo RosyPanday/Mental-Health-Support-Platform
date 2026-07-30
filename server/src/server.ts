@@ -40,9 +40,10 @@ export class Server {
       express.json(),
       expressMiddleware(this.apolloServer, {
         context: async ({ req }) => {
-          const authorization = contextHandler({ req });
+          const {id,role} = await contextHandler({ req });
           return {
-            authorization,
+            id,
+            role
           };
         },
       }),

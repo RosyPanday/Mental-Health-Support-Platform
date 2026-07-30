@@ -43,7 +43,7 @@ export const authResolver = {
       contextValue: ContextInterface,
     ) => {
       Validator.check(loginSchema, args.input);
-      const result = await new AuthService().checkLoginCredentials(args.input);
+      const result = await new AuthService().checkLoginCredentialsAndSignToken(args.input);
       return GraphqlResponse.send<SignupLoginResponseInterface>({
         message: "User logged in successfully",
         data: {
