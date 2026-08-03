@@ -10,6 +10,7 @@ api: rest api for uploading files + graphql api
 - **Authentication System**: Secure user signup and login using **JWT** (JSON Web Tokens) and **bcrypt** password hashing.
 - **Role-Based Access**: Schemas designed to support distinct user roles (Patients, Therapists).
 - **Database Architecture**: Relational database models and migrations built with **PostgreSQL**.
+**PHQ9 screening**: for patients for depression screening
 **file uploads** : using multer and save in server for verifying therapists crendentials
 
 ### Upcoming
