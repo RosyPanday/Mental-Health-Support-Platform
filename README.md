@@ -1,6 +1,8 @@
 # Mental Health Support Platform (Backend)
 
-A secure backend API built to support mental health services, user management, and therapy scheduling.
+A secure backend API built to support mental health services, user management, and therapy scheduling. 
+
+api: rest api for uploading files + graphql api
 
 ## 🚀 Features
 
@@ -8,6 +10,7 @@ A secure backend API built to support mental health services, user management, a
 - **Authentication System**: Secure user signup and login using **JWT** (JSON Web Tokens) and **bcrypt** password hashing.
 - **Role-Based Access**: Schemas designed to support distinct user roles (Patients, Therapists).
 - **Database Architecture**: Relational database models and migrations built with **PostgreSQL**.
+**file uploads** : using multer and save in server for verifying therapists crendentials
 
 ### Upcoming
 - Appointment booking and management
@@ -22,7 +25,7 @@ A secure backend API built to support mental health services, user management, a
 - **Framework**: Express.js
 - **Database**: PostgreSQL (Sequelize ORM)
 - **Authentication**: JWT, Bcrypt
-
+-**file upload** :multer
 ---
 
 ## ⚙️ Getting Started
