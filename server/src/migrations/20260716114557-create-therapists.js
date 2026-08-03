@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('therapists', {
+    await queryInterface.createTable("therapists", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -14,11 +14,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users', // References the physical DB table 'users'
-          key: 'id',
+          model: "users", // References the physical DB table 'users'
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE', // Cleans up the profile if the User is hard deleted
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE", // Cleans up the profile if the User is hard deleted
       },
       name: {
         type: Sequelize.STRING(40),
@@ -40,6 +40,27 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      profile_pic: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      educational_doc1: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      educational_doc2: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      professional_doc: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      is_verified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       review: {
         type: Sequelize.DECIMAL(3, 2),
         defaultValue: 0,
@@ -51,12 +72,12 @@ module.exports = {
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       deleted_at: {
         type: Sequelize.DATE,
@@ -66,6 +87,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('therapists');
-  }
+    await queryInterface.dropTable("therapists");
+  },
 };

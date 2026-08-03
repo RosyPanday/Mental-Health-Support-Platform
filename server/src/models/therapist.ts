@@ -48,6 +48,32 @@ const Therapist = sequelize.define<TherapistModelInterface>(
       type: Sequelize.DECIMAL(3, 2),
       defaultValue: 0,
     },
+    profilePic: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      field: "profile_pic",
+    },
+    educationalDoc1: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      field: "educational_doc1",
+    },
+    educationalDoc2: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      field: "educational_doc2",
+    },
+    professionalDoc: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      field: "professional_doc",
+    },
+    isVerified: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      field: "is_verified",
+    },
     completedAppointments: {
       type: Sequelize.INTEGER,
       defaultValue: 0,

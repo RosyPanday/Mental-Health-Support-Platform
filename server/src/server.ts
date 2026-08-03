@@ -9,6 +9,7 @@ import { corsWhiteList, port } from "./config/index.js";
 import { Database } from "./database/connection.js";
 import { schema } from "./graphql/schema/index.js";
 import { contextHandler } from "./middleware/context.js";
+import routes from "./api/routes/index.js";
 
 export class Server {
   private app: express.Application;
@@ -23,9 +24,15 @@ export class Server {
     console.log("connect to database");
   }
 
+  private setUpMiddleware() {
+    this.app.use(cors<cors.CorsRequest>({ origin: corsWhiteList }));
+    this.app.use(express.json());
+  }
   public async start() {
     await this.connectDB();
     this.httpServer = http.createServer(this.app);
+    this.setUpMiddleware();
+    this.app.use("/api/", routes);
     this.apolloServer = new ApolloServer({
       schema: schema,
       introspection: true,
@@ -36,14 +43,16 @@ export class Server {
     await this.apolloServer.start();
     this.app.use(
       "/graphql",
-      cors<cors.CorsRequest>({ origin: corsWhiteList }),
-      express.json(),
       expressMiddleware(this.apolloServer, {
         context: async ({ req }) => {
-          const {id,role} = await contextHandler({ req });
+          const context = await contextHandler({ req });
+          if (!context) {
+            throw new Error("Unauthorized User");
+          }
+          const { id, role } = context;
           return {
             id,
-            role
+            role,
           };
         },
       }),

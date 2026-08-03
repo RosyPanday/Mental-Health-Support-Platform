@@ -14,7 +14,7 @@ import { phqNineSchema } from "#src/validators/index.js";
 
 export const ScreeningResolver = {
   Mutation: {
-    phqNineScreening: async (
+    phqNineScreening: und it wasync (
       parent: ParentNode,
       args: { input: ScreeningInterface },
       contextValue: ContextInterface,

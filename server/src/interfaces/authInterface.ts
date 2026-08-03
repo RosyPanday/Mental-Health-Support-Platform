@@ -13,6 +13,11 @@ export interface InputSignupInterface {
   educationDegree?: string | undefined;
   specialization?: string | undefined;
   yearsOfExperience?: string | undefined;
+  profilePic?: string;
+  educationalDoc1?: string;
+  educationalDoc2?: string;
+  professionalDoc?: string;
+  verified: boolean;
   createdAt?: Date;
   upadtedAt?: Date;
   deletedAt?: Date;
@@ -21,7 +26,7 @@ export interface InputSignupInterface {
 
 export interface InputLoginInterface {
   username: string;
-  password:string;
+  password: string;
   role: string;
 }
 
