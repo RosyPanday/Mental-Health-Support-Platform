@@ -12,10 +12,10 @@ api: rest api for uploading files + graphql api
 - **Database Architecture**: Relational database models and migrations built with **PostgreSQL**.
 **PHQ9 screening**: for patients for depression screening
 **file uploads** : using multer and save in server for verifying therapists crendentials
+**Therapist recommendation enginer**: top ranked therapists are recommended using TF IDF algorithm 
 
 ### Upcoming
 - Appointment booking and management
-- Therapist recommendation engine
 - booking consultations
 
 ---
