@@ -26,7 +26,7 @@ export const authDefs: DocumentNode = gql`
     username: String
     name: String
     phoneNumber: String
-    role: String
+    role: UserRole
     password: String
     email: String
     language: String
@@ -38,7 +38,7 @@ export const authDefs: DocumentNode = gql`
   input InputLogin {
     username: String
     password:String
-    role: String
+    role: UserRole
   }
   # extend type Query {
   # }

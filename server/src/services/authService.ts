@@ -56,7 +56,7 @@ export class AuthService {
         {
           username: input.username,
           password: hashedPassword,
-          email: input.email,
+          email:input.email,
           phoneNumber: input.phoneNumber,
           role: input.role,
         },
