@@ -7,3 +7,4 @@ export * from './therapistInterface.js';
 export * from './userInterface.js';
 export * from './screeningInterface.js';
 export * from './graphqlResponseInterface.js';
+export * from './requestConsultationInterface.js';

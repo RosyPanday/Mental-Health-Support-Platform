@@ -8,18 +8,34 @@ export const PatientDefs: DocumentNode = gql`
     description: String!
   }
 
+  input RequestConsultationInput {
+    preferredTime: String!
+    therapistId: Int!
+  }
+
   type RecommendedTherapistsData {
     recommendedTherapists: [Therapist!]
   }
 
   type TherapistRecommendationResponse {
     message: String
-    data: RecommendedTherapistsData
+    data: String
+  }
+
+  type RequestConsultationResponse {
+    message: String
+    data: String
   }
 
   type Query {
     searchTherapists(
       input: searchTherapistsInput
     ): TherapistRecommendationResponse
+  }
+
+  extend type Mutation {
+    requestConsultation(
+      input: RequestConsultationInput!
+    ): RequestConsultationResponse
   }
 `;

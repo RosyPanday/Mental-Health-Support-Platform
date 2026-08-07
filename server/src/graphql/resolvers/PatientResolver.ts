@@ -4,13 +4,17 @@ import type { GraphqlResponseInterface } from "#src/interfaces/graphqlResponseIn
 import type { therapistRecommendationInterface } from "#src/interfaces/patientInterface.js";
 import type { TherapistInterface } from "#src/interfaces/therapistInterface.js";
 import { Validator } from "#src/middleware/validator.js";
+import { PatientService } from "#src/services/patientService.js";
 import { TherapistRecommendationService } from "#src/services/therapistRecommendationService.js";
 import { GraphqlResponse } from "#src/utils/graphqlResponse.js";
 import { requireRole } from "#src/utils/roleChecker.js";
-import { descriptionSchema } from "#src/validators/patientValidator.js";
+import {
+  descriptionSchema,
+  requestConsultationSchema,
+} from "#src/validators/patientValidator.js";
 
 export const PatientResolver = {
-   Query: {
+  Query: {
     searchTherapists: async (
       parent: ParentNode,
       args: {
@@ -19,7 +23,7 @@ export const PatientResolver = {
         };
       },
       contextValue: ContextInterface,
-    ): Promise<GraphqlResponseInterface<any>> => {
+    ): Promise<GraphqlResponseInterface<therapistRecommendationInterface>> => {
       requireRole(contextValue.role, [RoleEnum.patient]);
       Validator.check(descriptionSchema, args.input);
 
@@ -37,6 +41,32 @@ export const PatientResolver = {
         data: {
           recommendedTherapists,
         },
+      });
+    },
+  },
+  Mutation: {
+    requestConsultation: async (
+      parent: ParentNode,
+      args: {
+        input: {
+          preferredTime: Date;
+          therapistId: number;
+        };
+      },
+      contextValue: ContextInterface,
+    ): Promise<GraphqlResponseInterface<string>> => {
+      requireRole(contextValue.role, [RoleEnum.patient]);
+
+      Validator.check(requestConsultationSchema, args.input);
+      const consultation = await new PatientService().requestConsultation({
+        patientId: contextValue.id!,
+        therapistId: args.input.therapistId,
+        preferredTime: args.input.preferredTime,
+      });
+
+      return GraphqlResponse.send<string>({
+        message: "Consultation requested successfully",
+        data:`Your consultation has been sent to the specified therapist.`,
       });
     },
   },
