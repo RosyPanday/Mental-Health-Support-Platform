@@ -127,6 +127,7 @@ export abstract class BaseRepository<IT, RT>
     group,
     limit,
     logging,
+    raw,
     offset,
     transaction,
   }: {
@@ -136,6 +137,7 @@ export abstract class BaseRepository<IT, RT>
     order?: Order;
     group?: GroupOption;
     limit?: number;
+    raw?: boolean;
     logging?: boolean | ((sql: string, timing?: number) => void);
     offset?: number;
     transaction?: Transaction;
@@ -167,7 +169,7 @@ export abstract class BaseRepository<IT, RT>
     include?: IncludeOptions[];
     order?: Order;
     paranoid?: boolean;
-    raw?:boolean;
+    raw?: boolean;
     transaction?: Transaction;
   }): Promise<RT> {
     return this.model.findOne({

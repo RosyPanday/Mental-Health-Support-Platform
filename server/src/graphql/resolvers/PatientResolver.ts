@@ -7,6 +7,7 @@ import { Validator } from "#src/middleware/validator.js";
 import { PatientService } from "#src/services/patientService.js";
 import { TherapistRecommendationService } from "#src/services/therapistRecommendationService.js";
 import { GraphqlResponse } from "#src/utils/graphqlResponse.js";
+import { Guard } from "#src/utils/guard.js";
 import { requireRole } from "#src/utils/roleChecker.js";
 import {
   descriptionSchema,
@@ -58,8 +59,10 @@ export const PatientResolver = {
       requireRole(contextValue.role, [RoleEnum.patient]);
 
       Validator.check(requestConsultationSchema, args.input);
+      const patientId = await Guard.grantPatient(contextValue.id);
+
       const consultation = await new PatientService().requestConsultation({
-        patientId: contextValue.id!,
+        patientId: patientId,
         therapistId: args.input.therapistId,
         preferredTime: args.input.preferredTime,
       });

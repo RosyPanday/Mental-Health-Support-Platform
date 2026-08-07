@@ -18,14 +18,15 @@ export const TherapistDefs: DocumentNode = gql`
     role: UserRole
     profilePic: String
   }
-  enum RequestConsultationStatusEnum {
+  enum ConsultationStatusEnum {
     confirmed
+    pending
     cancelled
   }
 
   input ConfirmOrCancelBookingInput {
     consultationId: Int!
-    status: RequestConsultationStatusEnum!
+    status: ConsultationStatusEnum!
     reason: String
   }
 

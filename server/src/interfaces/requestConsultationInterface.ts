@@ -1,6 +1,8 @@
 import * as Sequelize from "sequelize";
 
 import type { RequestConsultationStatusEnum } from "#src/enums/requestConsultationStatusEnum.js";
+import type { PatientInterface } from "./patientInterface.js";
+import type { TherapistInterface } from "./therapistInterface.js";
 
 export interface RequestConsultationInterface {
   id: number;
@@ -12,6 +14,19 @@ export interface RequestConsultationInterface {
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
+  patient?: Pick<PatientInterface, "id" | "name" | "language">;
+  therapist?: Pick<
+    TherapistInterface,
+    | "id"
+    | "name"
+    | "educationDegree"
+    | "specialization"
+    | "yearsOfExperience"
+    | "language"
+    | "review"
+    | "profilePic"
+    | "isVerified"
+  >;
 }
 
 export interface RequestConsultationModelInterface

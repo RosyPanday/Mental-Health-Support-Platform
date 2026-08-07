@@ -8,10 +8,13 @@ import { PatientDefs } from "../typeDefs/patientTypeDef.js";
 import { PatientResolver } from "../resolvers/PatientResolver.js";
 import { TherapistDefs } from "../typeDefs/therapistTypeDef.js";
 import { TherapistResolver } from "../resolvers/therapistResolver.js";
+import { consultationDefs } from "../typeDefs/consultationTypeDef.js";
+import { consultationResolver } from "../resolvers/consultationResolver.js";
 
 export const schema: GraphQLSchema = buildSubgraphSchema([
   { typeDefs: authDefs, resolvers: authResolver },
   { typeDefs: screeningDefs, resolvers: ScreeningResolver },
   { typeDefs: PatientDefs, resolvers: PatientResolver },
   { typeDefs: TherapistDefs, resolvers: TherapistResolver },
+  { typeDefs: consultationDefs, resolvers: consultationResolver },
 ]);
