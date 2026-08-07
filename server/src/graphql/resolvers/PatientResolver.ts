@@ -54,7 +54,7 @@ export const PatientResolver = {
         };
       },
       contextValue: ContextInterface,
-    ): Promise<GraphqlResponseInterface<string>> => {
+    ): Promise<GraphqlResponseInterface<void>> => {
       requireRole(contextValue.role, [RoleEnum.patient]);
 
       Validator.check(requestConsultationSchema, args.input);
@@ -64,9 +64,8 @@ export const PatientResolver = {
         preferredTime: args.input.preferredTime,
       });
 
-      return GraphqlResponse.send<string>({
-        message: "Consultation requested successfully",
-        data:`Your consultation has been sent to the specified therapist.`,
+      return GraphqlResponse.send<void>({
+        message: "Your consultation has been sent to the specified therapist",
       });
     },
   },

@@ -40,6 +40,10 @@ const RequestConsultation = sequelize.define<RequestConsultationModelInterface>(
       allowNull: false,
       field: "preferred_time",
     },
+    reason: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     status: {
       type: Sequelize.ENUM(...Object.values(RequestConsultationStatusEnum)),
       allowNull: false,

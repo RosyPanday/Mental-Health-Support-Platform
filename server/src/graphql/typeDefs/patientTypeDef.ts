@@ -19,7 +19,6 @@ export const PatientDefs: DocumentNode = gql`
 
   type TherapistRecommendationResponse {
     message: String
-    data: String
   }
 
   type RequestConsultationResponse {

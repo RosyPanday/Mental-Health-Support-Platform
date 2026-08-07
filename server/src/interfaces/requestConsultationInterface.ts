@@ -7,6 +7,7 @@ export interface RequestConsultationInterface {
   patientId: number;
   therapistId: number;
   preferredTime: Date;
+  reason:string;
   status: RequestConsultationStatusEnum;
   createdAt?: Date;
   updatedAt?: Date;
