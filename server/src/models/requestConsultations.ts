@@ -5,6 +5,7 @@ import { RequestConsultationStatusEnum } from "#src/enums/requestConsultationSta
 import type { RequestConsultationModelInterface } from "#src/interfaces/index.js";
 import Patient from "./patient.js";
 import Therapist from "./therapist.js";
+import { CallStatusEnum } from "#src/enums/callStatusEnum.js";
 
 const sequelize = Database.sequelize;
 
@@ -48,6 +49,17 @@ const RequestConsultation = sequelize.define<RequestConsultationModelInterface>(
       type: Sequelize.ENUM(...Object.values(RequestConsultationStatusEnum)),
       allowNull: false,
       defaultValue: RequestConsultationStatusEnum.pending,
+    },
+    roomName: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      field: "room_name",
+    },
+    callStatus: {
+      type: Sequelize.ENUM(...Object.values(CallStatusEnum)),
+      allowNull: false,
+      defaultValue: CallStatusEnum.scheduled,
+      field: "call_status",
     },
   },
   {

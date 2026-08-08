@@ -3,6 +3,7 @@ import * as Sequelize from "sequelize";
 import type { RequestConsultationStatusEnum } from "#src/enums/requestConsultationStatusEnum.js";
 import type { PatientInterface } from "./patientInterface.js";
 import type { TherapistInterface } from "./therapistInterface.js";
+import type { CallStatusEnum } from "#src/enums/callStatusEnum.js";
 
 export interface RequestConsultationInterface {
   id: number;
@@ -11,6 +12,8 @@ export interface RequestConsultationInterface {
   preferredTime: Date;
   reason:string;
   status: RequestConsultationStatusEnum;
+  callStatus:CallStatusEnum;
+  roomName:String;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
