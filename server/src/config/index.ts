@@ -18,5 +18,8 @@ export const port = parseInt(checkEnv(process.env.PORT, "PORT")),
   corsWhiteList = checkEnv(
     process.env.CORS_WHITE_LIST,
     "CORS_WHITE_LIST",
-  ).split(","),
+  )
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
   jwtSecret = checkEnv(process.env.JWT_SECRET, "JWT_SECRET");

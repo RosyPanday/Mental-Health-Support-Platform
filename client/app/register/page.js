@@ -1,45 +1,318 @@
 "use client";
-import { useState } from 'react';
-import Link from 'next/link';
 
-export default function Register() {
-  const [formData, setFormData] = useState({ username: '', password: '', confirmPassword: '' });
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-    // Backend logic yaha connect hunxa paxi
-    alert(`Registration triggered for username: ${formData.username}`);
+export default function RegisterPage() {
+  const router = useRouter();
+
+  const [form, setForm] = useState({
+    role: "patient",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+    phoneNumber: "",
+    email: "",
+    language: "",
+    educationDegree: "",
+    specialization: "",
+    yearsOfExperience: "",
+  });
+
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const updateForm = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (form.password !== form.confirmPassword) {
+      setMessage("Passwords do not match.");
+      return;
+    }
+
+    const input = {
+      username: form.username,
+      password: form.password,
+      name: form.name,
+      phoneNumber: form.phoneNumber,
+      email: form.email,
+      language: form.language,
+      role: form.role,
+    };
+
+    if (form.role === "therapist") {
+      input.educationDegree = form.educationDegree;
+      input.specialization = form.specialization;
+      input.yearsOfExperience = Number(form.yearsOfExperience);
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:4000/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: `
+            mutation Signup($input: InputSignup) {
+              signup(input: $input) {
+                message
+                data {
+                  token
+                  user {
+                    username
+                    role
+                  }
+                }
+              }
+            }
+          `,
+          variables: {
+            input,
+          },
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.errors) {
+        setMessage(result.errors[0].message);
+        return;
+      }
+
+      const token = result.data?.signup?.data?.token;
+
+      if (!token) {
+        setMessage("Account creation failed.");
+        return;
+      }
+
+      localStorage.setItem("authToken", token);
+
+      if (form.role === "patient") {
+        router.push("/screening");
+      } else {
+        setMessage(
+          "Therapist account created. Upload verification documents next."
+        );
+      }
+
+    } catch (error) {
+      setMessage(
+        "Server connection failed. Please check backend server."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
-    <div className="max-w-md mx-auto my-16 p-8 bg-white border border-slate-100 shadow-xl rounded-2xl">
-      <h2 className="text-2xl font-bold text-slate-800 text-center mb-2">Create Anonymous Account</h2>
-      <p className="text-xs text-slate-400 text-center mb-6">Choose a unique avatar/username. No real email or name required.</p>
-      
-      <form onSubmit={handleRegister} className="space-y-4">
-        <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Anonymous Username</label>
-          <input type="text" required value={formData.username} onChange={(e) => setFormData({...formData, username: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="e.g., lone_wolf44" />
+    <>
+      <Navbar />
+
+      <div className="min-h-screen bg-slate-100 flex justify-center items-center py-10 px-4">
+
+        <div className="bg-white w-full max-w-lg rounded-2xl shadow-lg p-8">
+
+          <h1 className="text-3xl font-bold text-center text-emerald-600 mb-6">
+            Create Account
+          </h1>
+
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+
+
+            <div>
+              <p className="font-semibold mb-2">
+                Register as
+              </p>
+
+              <label className="mr-6">
+                <input
+                  type="radio"
+                  name="role"
+                  value="patient"
+                  checked={form.role === "patient"}
+                  onChange={updateForm}
+                  className="mr-2"
+                />
+                Patient
+              </label>
+
+
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="therapist"
+                  checked={form.role === "therapist"}
+                  onChange={updateForm}
+                  className="mr-2"
+                />
+                Therapist
+              </label>
+            </div>
+
+
+            <input
+              name="username"
+              placeholder="Username"
+              value={form.username}
+              onChange={updateForm}
+              required
+              className="w-full border p-3 rounded-lg"
+            />
+
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={updateForm}
+              required
+              className="w-full border p-3 rounded-lg"
+            />
+
+
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={form.confirmPassword}
+              onChange={updateForm}
+              required
+              className="w-full border p-3 rounded-lg"
+            />
+
+
+            <input
+              name="name"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={updateForm}
+              required
+              className="w-full border p-3 rounded-lg"
+            />
+
+
+            <input
+              name="phoneNumber"
+              placeholder="Phone Number"
+              value={form.phoneNumber}
+              onChange={updateForm}
+              required
+              className="w-full border p-3 rounded-lg"
+            />
+
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={updateForm}
+              required
+              className="w-full border p-3 rounded-lg"
+            />
+
+
+            <input
+              name="language"
+              placeholder="Language (Nepali/English)"
+              value={form.language}
+              onChange={updateForm}
+              required
+              className="w-full border p-3 rounded-lg"
+            />
+
+
+
+            {form.role === "therapist" && (
+              <>
+                <input
+                  name="educationDegree"
+                  placeholder="Education Degree"
+                  value={form.educationDegree}
+                  onChange={updateForm}
+                  required
+                  className="w-full border p-3 rounded-lg"
+                />
+
+
+                <input
+                  name="specialization"
+                  placeholder="Specialization"
+                  value={form.specialization}
+                  onChange={updateForm}
+                  required
+                  className="w-full border p-3 rounded-lg"
+                />
+
+
+                <input
+                  type="number"
+                  name="yearsOfExperience"
+                  placeholder="Years of Experience"
+                  value={form.yearsOfExperience}
+                  onChange={updateForm}
+                  required
+                  className="w-full border p-3 rounded-lg"
+                />
+              </>
+            )}
+
+
+
+            {message && (
+              <p className="text-center text-sm text-red-500">
+                {message}
+              </p>
+            )}
+
+
+
+            <button
+              disabled={loading}
+              className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 disabled:bg-gray-400"
+            >
+              {loading
+                ? "Creating Account..."
+                : `Sign up as ${form.role}`}
+            </button>
+
+
+          </form>
+
+
+          <p className="text-center mt-5 text-sm">
+            Already have an account?{" "}
+            <Link
+              href="/login"
+              className="text-emerald-600 font-semibold"
+            >
+              Login
+            </Link>
+          </p>
+
+
         </div>
-        <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Password</label>
-          <input type="password" required value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="••••••••" />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Confirm Password</label>
-          <input type="password" required value={formData.confirmPassword} onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="••••••••" />
-        </div>
-        <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 rounded-lg transition-all text-sm mt-2">
-          Sign Up
-        </button>
-      </form>
-      <p className="text-xs text-center text-slate-500 mt-4">
-        Already have an account? <Link href="/login" className="text-emerald-600 font-semibold hover:underline">Login</Link>
-      </p>
-    </div>
+
+      </div>
+    </>
   );
 }
