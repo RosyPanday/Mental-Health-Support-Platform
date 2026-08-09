@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { hasPurchasedTicket } from "@/lib/tickets";
 
 const questions = [
   "Little interest or pleasure in doing things",
@@ -22,11 +24,23 @@ const options = [
 ];
 
 export default function PHQ9Screening() {
+  const router = useRouter();
   const [answers, setAnswers] = useState<(number | null)[]>(
     Array(9).fill(null),
   );
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+const [result, setResult] = useState<{
+    message: string;
+    totalScore: number;
+    severity: string;
+  } | null>(null);
+
+  useEffect(() => {
+    if (hasPurchasedTicket()) {
+      router.replace("/therapists");
+    }
+  }, [router]);
 
   const setAnswer = (index: number, value: number) => {
     const updatedAnswers = [...answers];
@@ -85,9 +99,11 @@ export default function PHQ9Screening() {
       }
 
       const saved = result.data.phqNineScreening;
-      setMessage(
-        `${saved.message} Score: ${saved.data.totalScore}, Severity: ${saved.data.severity}`,
-      );
+      setResult({
+        message: saved.message,
+        totalScore: saved.data.totalScore,
+        severity: saved.data.severity,
+      });
     } catch {
       setMessage("Could not save your screening. Please try again.");
     } finally {
@@ -136,6 +152,30 @@ export default function PHQ9Screening() {
           {loading ? "Saving..." : "Submit Screening"}
         </button>
       </form>
+
+      {result && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4" role="presentation">
+          <section role="dialog" aria-modal="true" aria-labelledby="screening-result-title" className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600">Your consultation check-in</p>
+            <h2 id="screening-result-title" className="mt-2 text-2xl font-bold text-slate-800">Screening Result</h2>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              <div className="rounded-xl bg-emerald-50 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">Score</p>
+                <p className="mt-1 text-2xl font-bold text-slate-800">{result.totalScore}</p>
+              </div>
+              <div className="rounded-xl bg-slate-100 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">Severity</p>
+                <p className="mt-1 text-lg font-bold capitalize text-slate-800">{result.severity}</p>
+              </div>
+            </div>
+            <p className="mt-5 leading-6 text-slate-600">{result.message}</p>
+            <div className="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <button type="button" onClick={() => setResult(null)} className="rounded-xl border border-slate-200 px-4 py-2.5 font-semibold text-slate-700 hover:bg-slate-50">Go Back</button>
+              <button type="button" onClick={() => router.push("/therapists")} className="rounded-xl bg-emerald-600 px-4 py-2.5 font-semibold text-white hover:bg-emerald-700">Call Therapist</button>
+            </div>
+          </section>
+        </div>
+      )}
     </main>
   );
 }

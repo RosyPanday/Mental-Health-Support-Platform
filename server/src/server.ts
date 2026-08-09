@@ -25,7 +25,30 @@ export class Server {
   }
 
   private setUpMiddleware() {
-    this.app.use(cors<cors.CorsRequest>({ origin: corsWhiteList }));
+    this.app.use(
+      cors<cors.CorsRequest>({
+        origin: (origin, callback) => {
+          if (!origin) {
+            callback(null, true);
+            return;
+          }
+
+          const isAllowedOrigin =
+            corsWhiteList.includes(origin) ||
+            /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
+
+          if (isAllowedOrigin) {
+            callback(null, true);
+            return;
+          }
+
+          callback(new Error(`Origin not allowed by CORS: ${origin}`));
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+      }),
+    );
     this.app.use(express.json());
   }
   public async start() {

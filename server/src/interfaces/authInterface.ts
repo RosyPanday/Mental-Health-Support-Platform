@@ -17,6 +17,7 @@ export interface InputSignupInterface {
   educationalDoc1?: string;
   educationalDoc2?: string;
   professionalDoc?: string;
+  isVerified?: boolean;
   verified: boolean;
   createdAt?: Date;
   upadtedAt?: Date;

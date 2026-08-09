@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { saveAuthSession } from "@/lib/auth";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function RegisterPage() {
     });
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
 
@@ -100,17 +101,17 @@ export default function RegisterPage() {
         return;
       }
 
-      localStorage.setItem("authToken", token);
+const role = result.data?.signup?.data?.user?.role ?? form.role;
+      saveAuthSession(token, role);
 
       if (form.role === "patient") {
-        router.push("/screening");
-      } else {
-        setMessage(
-          "Therapist account created. Upload verification documents next."
-        );
+        router.push("/home");
+        return;
       }
 
-    } catch (error) {
+      router.push("/therapist/dashboard");
+
+    } catch {
       setMessage(
         "Server connection failed. Please check backend server."
       );

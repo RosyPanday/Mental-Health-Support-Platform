@@ -1,4 +1,5 @@
 import './globals.css';
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 import Navbar from '@/components/Navbar';
 
 export const metadata = {

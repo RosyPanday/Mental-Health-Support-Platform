@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { saveAuthSession } from "@/lib/auth";
 
 export default function Login() {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function Login() {
     username: "",
     password: "",
   });
+  const [role, setRole] = useState("patient");
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
@@ -41,7 +43,7 @@ export default function Login() {
             input: {
               username: formData.username,
               password: formData.password,
-              role: "patient",
+              role,
             },
           },
         }),
@@ -61,8 +63,10 @@ export default function Login() {
         return;
       }
 
-      localStorage.setItem("authToken", token);
-      router.push("/screening");
+      const loggedInRole = result.data?.login?.data?.user?.role;
+      saveAuthSession(token, loggedInRole);
+
+      router.push(loggedInRole === "therapist" ? "/therapist/dashboard" : "/home");
     } catch {
       setError("Server connection failed. Please try again.");
     }
@@ -71,8 +75,32 @@ export default function Login() {
   return (
     <div className="max-w-md mx-auto my-16 p-8 bg-white border border-slate-100 shadow-xl rounded-2xl">
       <h2 className="text-2xl font-bold text-slate-800 text-center mb-2">
-        Patient Login
+        {role === "therapist" ? "Therapist Login" : "Patient Login"}
       </h2>
+
+      <div className="mb-6">
+        <p className="block text-xs font-semibold text-slate-600 mb-1">
+          Login as
+        </p>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2 text-sm text-slate-700">
+            <input
+              type="radio"
+              checked={role === "patient"}
+              onChange={() => setRole("patient")}
+            />
+            Patient
+          </label>
+          <label className="flex items-center gap-2 text-sm text-slate-700">
+            <input
+              type="radio"
+              checked={role === "therapist"}
+              onChange={() => setRole("therapist")}
+            />
+            Therapist
+          </label>
+        </div>
+      </div>
 
       <form onSubmit={handleLogin} className="space-y-4">
         <div>

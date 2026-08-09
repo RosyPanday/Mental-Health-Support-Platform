@@ -5,5 +5,6 @@ export * from './patientInterface.js';
 export * from './screeningInterface.js';
 export * from './therapistInterface.js';
 export * from './userInterface.js';
+export * from './consultationTicketInterface.js';
 export * from './screeningInterface.js';
 export * from './graphqlResponseInterface.js';

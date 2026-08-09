@@ -39,6 +39,7 @@ export class TherapistRepository extends BaseRepository<
         educationalDoc1,
         educationalDoc2,
         professionalDoc,
+        isVerified: true,
       },
     });
   }

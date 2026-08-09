@@ -11,12 +11,33 @@ export const TherapistDefs: DocumentNode = gql`
     email: String
     specialization: String
     yearsOfExperience: Int
+    educationDegree: String
+    review: Float
+    isVerified: Boolean
     educationalDocument1: String
     educationalDocument2: String
     professionalDoc: String
-    language:String
+language:String
     role:UserRole
     profilePic: String
+    isOnline: Boolean
   }
-  
+  type TherapistListData {
+    therapists: [Therapist!]!
+  }
+type TherapistListResponse {
+    message: String
+    data: TherapistListData
+  }
+  type TherapistProfileData {
+    therapist: Therapist
+  }
+  type TherapistProfileResponse {
+    message: String
+    data: TherapistProfileData
+  }
+  extend type Query {
+    therapists: TherapistListResponse
+    therapistProfile: TherapistProfileResponse
+  }
 `;
