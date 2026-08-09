@@ -13,7 +13,18 @@ export class UploadService {
     educationalDoc1: string,
     educationalDoc2: string,
     professionalDoc: string,
-  ) :Promise<void>{
+  ): Promise<void> {
+    //checking just one document just to find out if theyve already uploaded the document once before
+    const existingTherapist = await this.therapistRepository.findOne({
+      where: {
+        id: therapistId,
+      },
+      attributes: ["profilePic"],
+      raw: true,
+    });
+    if (existingTherapist.profilePic) {
+      throw new Error(" You cannot upload your documents multiple times");
+    }
     await this.therapistRepository.updateTherapistDocumentsAndImage(
       therapistId,
       profilePic,

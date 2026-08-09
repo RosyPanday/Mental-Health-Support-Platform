@@ -24,7 +24,6 @@ export const PatientDefs: DocumentNode = gql`
 
   type RequestConsultationResponse {
     message: String
-    data: String
   }
 
   type Query {

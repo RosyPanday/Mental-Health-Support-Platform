@@ -33,7 +33,7 @@ const User = sequelize.define<UserModelInterface>(
       unique: true,
     },
     role: {
-      type: Sequelize.ENUM(RoleEnum.patient, RoleEnum.therapist),
+      type: Sequelize.ENUM(RoleEnum.patient, RoleEnum.therapist,RoleEnum.admin),
     },
   },
   {

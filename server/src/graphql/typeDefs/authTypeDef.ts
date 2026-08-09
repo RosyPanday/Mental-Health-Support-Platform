@@ -6,6 +6,7 @@ export const authDefs: DocumentNode = gql`
   enum UserRole {
     patient
     therapist
+    admin
   }
   type User {
     id: ID

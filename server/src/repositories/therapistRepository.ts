@@ -6,7 +6,7 @@ import type {
 } from "#src/interfaces/index.js";
 
 export class TherapistRepository extends BaseRepository<
-  InputSignupInterface,
+  TherapistInterface,
   TherapistInterface
 > {
   constructor() {
