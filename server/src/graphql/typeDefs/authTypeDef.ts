@@ -10,8 +10,8 @@ export const authDefs: DocumentNode = gql`
   type User {
     id: ID
     username: String
-    name: String
     phoneNumber: String
+    email:String
     role: UserRole
   }
   type SignupData {

@@ -14,6 +14,7 @@ export interface TherapistInterface {
   educationalDoc1: string;
   educationalDoc2: string;
   professionalDoc: string;
+  rate:number;
   isVerified: boolean;
 }
 

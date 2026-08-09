@@ -21,6 +21,7 @@ export const consultationDefs: DocumentNode = gql`
     id: Int
     name: String
     language: String
+    user: User
   }
 
   type ConsultationTherapist {
@@ -31,8 +32,10 @@ export const consultationDefs: DocumentNode = gql`
     yearsOfExperience: Int
     language: String
     review: Float
+    rate: Int
     profilePic: String
     isVerified: Boolean
+    user: User
   }
 
   type ViewConsultationsResponse {

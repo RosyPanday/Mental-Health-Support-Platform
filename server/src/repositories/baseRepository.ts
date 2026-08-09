@@ -128,6 +128,8 @@ export abstract class BaseRepository<IT, RT>
     limit,
     logging,
     raw,
+    plain,
+    nest,
     offset,
     transaction,
   }: {
@@ -138,6 +140,8 @@ export abstract class BaseRepository<IT, RT>
     group?: GroupOption;
     limit?: number;
     raw?: boolean;
+    nest?: boolean;
+    plain?: boolean;
     logging?: boolean | ((sql: string, timing?: number) => void);
     offset?: number;
     transaction?: Transaction;
@@ -149,6 +153,9 @@ export abstract class BaseRepository<IT, RT>
       order,
       limit,
       group,
+      raw,
+      nest,
+      plain,
       logging,
       offset,
       transaction,

@@ -1,7 +1,7 @@
 import * as Sequelize from "sequelize";
 
 import type { RequestConsultationStatusEnum } from "#src/enums/requestConsultationStatusEnum.js";
-import type { PatientInterface } from "./patientInterface.js";
+import type { PatientInterface, UserInterface } from "./index.js";
 import type { TherapistInterface } from "./therapistInterface.js";
 import type { CallStatusEnum } from "#src/enums/callStatusEnum.js";
 
@@ -10,14 +10,16 @@ export interface RequestConsultationInterface {
   patientId: number;
   therapistId: number;
   preferredTime: Date;
-  reason:string;
+  reason: string;
   status: RequestConsultationStatusEnum;
-  callStatus:CallStatusEnum;
-  roomName:String;
+  callStatus: CallStatusEnum;
+  roomName: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-  patient?: Pick<PatientInterface, "id" | "name" | "language">;
+  patient?: Pick<PatientInterface, "id" | "name" | "language"> & {
+    user?: Pick<UserInterface, "email" | "phoneNumber">;
+  };
   therapist?: Pick<
     TherapistInterface,
     | "id"
@@ -29,7 +31,10 @@ export interface RequestConsultationInterface {
     | "review"
     | "profilePic"
     | "isVerified"
-  >;
+    |"rate"
+  > & {
+    user?: Pick<UserInterface, "email" | "phoneNumber">;
+  };
 }
 
 export interface RequestConsultationModelInterface

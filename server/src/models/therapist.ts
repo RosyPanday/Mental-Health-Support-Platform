@@ -48,6 +48,10 @@ const Therapist = sequelize.define<TherapistModelInterface>(
       type: Sequelize.DECIMAL(3, 2),
       defaultValue: 0,
     },
+    rate: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     profilePic: {
       type: Sequelize.STRING,
       allowNull: true,

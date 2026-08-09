@@ -7,7 +7,7 @@ import { Guard } from "#src/utils/guard.js";
 
 export class ConsultationService {
   private requestConsultationRepository: RequestConsultationRepository;
-  
+
   constructor() {
     this.requestConsultationRepository = new RequestConsultationRepository();
   }
@@ -41,16 +41,33 @@ export class ConsultationService {
                 "yearsOfExperience",
                 "language",
                 "review",
+                "rate",
                 "profilePic",
                 "isVerified",
+              ],
+              include: [
+                {
+                  model: Model.User,
+                  as: "user",
+                  attributes: ["email", "phoneNumber"],
+                },
               ],
             }
           : {
               model: Model.Patient,
               as: "patient",
               attributes: ["id", "name", "language"],
+              include: [
+                {
+                  model: Model.User,
+                  as: "user",
+                  attributes: ["email", "phoneNumber"],
+                },
+              ],
             },
       ],
+      raw:true,
+      nest:true
     });
   }
 }
