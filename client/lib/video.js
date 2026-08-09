@@ -22,8 +22,8 @@ export async function startVideoCall(therapistId) {
     headers: authHeaders(),
     body: JSON.stringify({ therapistId }),
   });
-  const result = await response.json();
-  if (!response.ok) throw new Error(result.message || "Could not start the call.");
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !result) throw new Error(result?.message || "Could not start the call.");
   return result.data;
 }
 

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type NextFunction, type Request, type Response } from "express";
 import http from "http";
 import { ApolloServer, type BaseContext } from "@apollo/server";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
@@ -56,6 +56,14 @@ export class Server {
     this.httpServer = http.createServer(this.app);
     this.setUpMiddleware();
     this.app.use("/api/", routes);
+    this.app.use(
+      "/api/",
+      (err: any, _req: Request, res: Response, _next: NextFunction) => {
+        res.status(err?.status || 500).json({
+          message: err?.message || "Internal server error.",
+        });
+      },
+    );
     this.apolloServer = new ApolloServer({
       schema: schema,
       introspection: true,

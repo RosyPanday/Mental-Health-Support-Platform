@@ -133,8 +133,8 @@ export default function TherapistsPage() {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ therapistId }),
       });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.message || "Could not start the call.");
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result) throw new Error(result?.message || "This therapist is not available right now. Please try again later.");
 
       const therapist = therapists.find((item) => item.id === therapistId);
       saveCallSession({

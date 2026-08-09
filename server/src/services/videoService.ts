@@ -2,10 +2,18 @@ import jwt from "jsonwebtoken";
 import { streamApiKey, streamSecret } from "#src/config/index.js";
 
 const presence = new Map<number, number>();
-const activeCalls = new Map<string, { therapistId: number; patientUserId: number; patientStreamId: string; therapistStreamId: string }>();
+const activeCalls = new Map<string, { therapistId: number; patientUserId: number; patientStreamId: string; therapistStreamId: string; expiresAt: number }>();
 const ONLINE_TTL_MS = 45000;
+const CALL_MAX_TTL_MS = 2 * 60 * 60 * 1000;
 
 const streamIdFor = (userId: number) => `user-${userId}`;
+
+function pruneExpiredCalls(): void {
+  const now = Date.now();
+  for (const [callId, call] of activeCalls.entries()) {
+    if (now > call.expiresAt) activeCalls.delete(callId);
+  }
+}
 
 export const VideoService = {
   isConfigured(): boolean {
@@ -44,6 +52,7 @@ export const VideoService = {
   },
 
   isBusy(therapistId: number): boolean {
+    pruneExpiredCalls();
     for (const call of activeCalls.values()) {
       if (call.therapistId === therapistId) return true;
     }
@@ -51,6 +60,12 @@ export const VideoService = {
   },
 
   startCall(therapistId: number, patientUserId: number): { callId: string; patientStreamId: string; therapistStreamId: string } {
+    pruneExpiredCalls();
+
+    for (const [callId, call] of activeCalls.entries()) {
+      if (call.patientUserId === patientUserId) activeCalls.delete(callId);
+    }
+
     if (VideoService.isBusy(therapistId)) {
       throw new Error("This therapist is currently on a call. Please try again later.");
     }
@@ -60,6 +75,7 @@ export const VideoService = {
       patientUserId,
       patientStreamId: streamIdFor(patientUserId),
       therapistStreamId: streamIdFor(therapistId),
+      expiresAt: Date.now() + CALL_MAX_TTL_MS,
     });
     return { callId, patientStreamId: streamIdFor(patientUserId), therapistStreamId: streamIdFor(therapistId) };
   },
@@ -69,10 +85,12 @@ export const VideoService = {
   },
 
   getCall(callId: string) {
+    pruneExpiredCalls();
     return activeCalls.get(callId);
   },
 
   getCallByTherapist(therapistId: number) {
+    pruneExpiredCalls();
     for (const [callId, call] of activeCalls.entries()) {
       if (call.therapistId === therapistId) {
         return { callId, ...call };
