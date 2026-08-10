@@ -9,6 +9,7 @@ export interface InputSignupInterface {
   password: string;
   email: string;
   name: string;
+  rate?:number|undefined;
   language: string;
   educationDegree?: string | undefined;
   specialization?: string | undefined;

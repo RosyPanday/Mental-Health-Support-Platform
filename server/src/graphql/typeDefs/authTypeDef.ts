@@ -29,6 +29,7 @@ export const authDefs: DocumentNode = gql`
     phoneNumber: String
     role: UserRole
     password: String
+    rate:Int
     email: String
     language: String
     yearsOfExperience: Int
