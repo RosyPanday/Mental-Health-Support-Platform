@@ -10,6 +10,7 @@ import { Database } from "./database/connection.js";
 import { schema } from "./graphql/schema/index.js";
 import { contextHandler } from "./middleware/context.js";
 import routes from "./api/routes/index.js";
+import path from "path";
 
 export class Server {
   private app: express.Application;
@@ -27,6 +28,10 @@ export class Server {
   private setUpMiddleware() {
     this.app.use(cors<cors.CorsRequest>({ origin: corsWhiteList }));
     this.app.use(express.json());
+    this.app.use(
+      "/uploads",
+      express.static(path.join(process.cwd(), "uploads")),
+    );
   }
   public async start() {
     await this.connectDB();

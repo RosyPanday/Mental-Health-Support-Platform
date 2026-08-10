@@ -7,6 +7,14 @@ export class UploadService {
     this.therapistRepository = new TherapistRepository();
   }
 
+  formatFileUrl = (filePath: string): string => {
+    const normalizedPath = filePath.replace(/\\/g, "/");
+
+    return normalizedPath.startsWith("/")
+      ? normalizedPath
+      : `/${normalizedPath}`;
+  };
+
   public async uploadTherapistDocumentsAndImage(
     therapistId: number,
     profilePic: string,
@@ -27,10 +35,10 @@ export class UploadService {
     }
     await this.therapistRepository.updateTherapistDocumentsAndImage(
       therapistId,
-      profilePic,
-      educationalDoc1,
-      educationalDoc2,
-      professionalDoc,
+      this.formatFileUrl(profilePic),
+      this.formatFileUrl(educationalDoc1),
+      this.formatFileUrl(educationalDoc2),
+      this.formatFileUrl(professionalDoc),
     );
   }
 }
