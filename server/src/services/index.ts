@@ -5,3 +5,4 @@ export * from "./patientService.js";
 export * from "./therapistService.js";
 export * from "./consultationService.js";
 export * from "./videoCallService.js";
+export * from "./paymentService.js";

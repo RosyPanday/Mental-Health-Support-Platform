@@ -18,6 +18,7 @@
     "@apollo/server": "^5.5.1",
     "@apollo/subgraph": "^2.14.2",
     "@as-integrations/express5": "^1.1.2",
+    "axios": "^1.19.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "crypto": "^1.0.1",

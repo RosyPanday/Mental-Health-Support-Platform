@@ -1,4 +1,4 @@
-import type { RequestConsultationStatusEnum } from "#src/enums/requestConsultationStatusEnum.js";
+import { RequestConsultationStatusEnum } from "#src/enums/requestConsultationStatusEnum.js";
 import { RoleEnum } from "#src/enums/roleEnum.js";
 import type { RequestConsultationInterface } from "#src/interfaces/requestConsultationInterface.js";
 import { RequestConsultationRepository } from "#src/repositories/requestConsultationRepository.js";
@@ -65,9 +65,18 @@ export class ConsultationService {
                 },
               ],
             },
+        ...(isPatient && status === RequestConsultationStatusEnum.confirmed
+          ? [
+              {
+                model: Model.Payments,
+                as: "payment",
+                attributes: ["status"],
+              },
+            ]
+          : []),
       ],
-      raw:true,
-      nest:true
+      raw: true,
+      nest: true,
     });
   }
 }

@@ -169,6 +169,7 @@ export abstract class BaseRepository<IT, RT>
     order,
     paranoid,
     raw,
+    nest,
     transaction,
   }: {
     where?: WhereOptions<any>;
@@ -177,6 +178,7 @@ export abstract class BaseRepository<IT, RT>
     order?: Order;
     paranoid?: boolean;
     raw?: boolean;
+    nest?: boolean;
     transaction?: Transaction;
   }): Promise<RT> {
     return this.model.findOne({
@@ -185,6 +187,7 @@ export abstract class BaseRepository<IT, RT>
       include,
       order,
       raw,
+      nest,
       paranoid,
       transaction,
     });

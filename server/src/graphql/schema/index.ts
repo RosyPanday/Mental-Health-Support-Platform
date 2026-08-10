@@ -14,6 +14,8 @@ import { videoCallResolver } from "../resolvers/videoCallResolver.js";
 import { videoCallDefs } from "../typeDefs/videoCallTypeDef.js";
 import { AdminDefs } from "../typeDefs/adminTypeDef.js";
 import { AdminResolver } from "../resolvers/adminResolver.js";
+import { PaymentDefs } from "../typeDefs/paymentTypeDef.js";
+import { PaymentResolver } from "../resolvers/paymentResolver.js";
 
 export const schema: GraphQLSchema = buildSubgraphSchema([
   { typeDefs: authDefs, resolvers: authResolver },
@@ -23,5 +25,7 @@ export const schema: GraphQLSchema = buildSubgraphSchema([
   { typeDefs: consultationDefs, resolvers: consultationResolver },
   { typeDefs: videoCallDefs, resolvers: videoCallResolver },
   { typeDefs: AdminDefs, resolvers: AdminResolver },
+  { typeDefs: PaymentDefs, resolvers: PaymentResolver },
+
 
 ]);

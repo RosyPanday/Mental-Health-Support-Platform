@@ -9,3 +9,4 @@ export * from "./screeningInterface.js";
 export * from "./graphqlResponseInterface.js";
 export * from "./requestConsultationInterface.js";
 export * from "./videoCallInterface.js";
+export * from "./paymentInterface.js";

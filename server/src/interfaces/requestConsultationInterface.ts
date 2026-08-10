@@ -4,6 +4,7 @@ import type { RequestConsultationStatusEnum } from "#src/enums/requestConsultati
 import type { PatientInterface, UserInterface } from "./index.js";
 import type { TherapistInterface } from "./therapistInterface.js";
 import type { CallStatusEnum } from "#src/enums/callStatusEnum.js";
+import type { PaymentStatusEnum } from "#src/enums/paymentStatusEnum.js";
 
 export interface RequestConsultationInterface {
   id: number;
@@ -31,9 +32,12 @@ export interface RequestConsultationInterface {
     | "review"
     | "profilePic"
     | "isVerified"
-    |"rate"
+    | "rate"
   > & {
     user?: Pick<UserInterface, "email" | "phoneNumber">;
+  };
+  payment?: {
+    status: PaymentStatusEnum | string;
   };
 }
 

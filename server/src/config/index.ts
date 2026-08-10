@@ -19,4 +19,14 @@ export const port = parseInt(checkEnv(process.env.PORT, "PORT")),
     process.env.CORS_WHITE_LIST,
     "CORS_WHITE_LIST",
   ).split(","),
-  jwtSecret = checkEnv(process.env.JWT_SECRET, "JWT_SECRET");
+  jwtSecret = checkEnv(process.env.JWT_SECRET, "JWT_SECRET"),
+  khaltiBaseUrl = checkEnv(process.env.KHALTI_BASE_URL, "KHALTI_BASE_URL"),
+  khaltiSecretKey = checkEnv(
+    process.env.KHALTI_SECRET_KEY,
+    "KHALTI_SECRET_KEY",
+  ),
+  khaltiReturnUrl = checkEnv(
+    process.env.KHALTI_RETURN_URL,
+    "KHALTI_RETURN_URL",
+  ),
+  frontendUrl = checkEnv(process.env.FRONTEND_URL, "FRONTEND_URL");

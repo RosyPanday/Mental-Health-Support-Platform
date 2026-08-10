@@ -36,6 +36,7 @@ export const consultationDefs: DocumentNode = gql`
     profilePic: String
     isVerified: Boolean
     user: User
+    payment:Payment
   }
 
   type ViewConsultationsResponse {
