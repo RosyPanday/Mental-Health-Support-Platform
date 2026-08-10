@@ -12,7 +12,7 @@ export interface InputSignupInterface {
   language: string;
   educationDegree?: string | undefined;
   specialization?: string | undefined;
-  yearsOfExperience?: string | undefined;
+  yearsOfExperience?: number | undefined;
   profilePic?: string;
   educationalDoc1?: string;
   educationalDoc2?: string;
