@@ -62,26 +62,45 @@ export class AuthService {
         },
         { transaction: transaction },
       );
-      input.role === RoleEnum.patient
-        ? await this.patientRepository.create(
-            {
-              userId: user.id,
-              name: input.name,
-              language: input.language,
-            },
-            { transaction: transaction },
-          )
-        : await this.therapistRepository.create(
-            {
-              userId: user.id,
-              name: input.name,
-              language: input.language,
-              educationDegree: input.educationDegree,
-              specialization: input.specialization,
-              yearsOfExperience: input.yearsOfExperience,
-            },
-            { transaction: transaction },
-          );
+      if (input.role === RoleEnum.patient) {
+        await this.patientRepository.create(
+          {
+            userId: user.id,
+            name: input.name,
+            language: input.language,
+          },
+          { transaction: transaction },
+        );
+      } else {
+        const {
+          rate,
+          educationDegree,
+          specialization,
+          yearsOfExperience,
+        } = input;
+
+        if (
+          rate === undefined ||
+          educationDegree === undefined ||
+          specialization === undefined ||
+          yearsOfExperience === undefined
+        ) {
+          throw new Error("Therapist signup requires all professional details.");
+        }
+
+        await this.therapistRepository.create(
+          {
+            userId: user.id,
+            name: input.name,
+            language: input.language,
+            rate,
+            educationDegree,
+            specialization,
+            yearsOfExperience,
+          },
+          { transaction: transaction },
+        );
+      }
       userId = user.id;
     });
     //token creation

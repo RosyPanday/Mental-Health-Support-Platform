@@ -9,10 +9,11 @@ export interface InputSignupInterface {
   password: string;
   email: string;
   name: string;
+  rate?:number|undefined;
   language: string;
   educationDegree?: string | undefined;
   specialization?: string | undefined;
-  yearsOfExperience?: string | undefined;
+  yearsOfExperience?: number | undefined;
   profilePic?: string;
   educationalDoc1?: string;
   educationalDoc2?: string;

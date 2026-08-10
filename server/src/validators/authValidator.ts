@@ -34,6 +34,7 @@ const signupSchema = alternativeSchema.conditional(
     then: Joi.object({
       ...baseSignupFields,
       email: emailSchema.required(),
+      rate:numberSchema.required().min(1000).max(2000),
       phoneNumber: phoneNumberSchema.required(),
       role: stringSchema.label("Role").trim().valid("therapist").required(),
       educationDegree: stringSchema.label("Education Degree").trim().required(),
