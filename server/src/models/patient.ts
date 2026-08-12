@@ -27,6 +27,14 @@ const Patient = sequelize.define<PatientModelInterface>(
       type: Sequelize.STRING(40),
       allowNull: false,
     },
+    age: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    issues: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     language: {
       type: Sequelize.STRING,
     },

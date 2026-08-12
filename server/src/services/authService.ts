@@ -67,6 +67,8 @@ export class AuthService {
           {
             userId: user.id,
             name: input.name,
+            age: input.age!,
+            issues: input.issues,
             language: input.language,
           },
           { transaction: transaction },
