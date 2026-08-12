@@ -32,6 +32,8 @@ export const authDefs: DocumentNode = gql`
     rate:Int
     email: String
     language: String
+    age: Int
+    issues: String
     yearsOfExperience: Int
     educationDegree: String
     specialization: String

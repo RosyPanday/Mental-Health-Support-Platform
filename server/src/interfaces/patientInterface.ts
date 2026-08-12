@@ -5,6 +5,8 @@ export interface PatientInterface {
   id: number;
   userId: number;
   name: string;
+  age: number;
+  issues?: string;
   language: string;
 }
 

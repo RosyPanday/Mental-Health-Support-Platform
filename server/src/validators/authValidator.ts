@@ -23,30 +23,26 @@ const phoneNumberSchema = stringSchema
   .pattern(/^[0-9]{10}$/)
   .message('"Phone Number" must be exactly 10 digits');
 
-const yearsOfExperienceSchema = numberSchema
-  .label("Years of Experience")
-  .min(0)
-  .max(60);
-
 const signupSchema = alternativeSchema.conditional(
   Joi.object({ role: "therapist" }).unknown(),
   {
     then: Joi.object({
       ...baseSignupFields,
       email: emailSchema.required(),
-      rate:numberSchema.required().min(1000).max(2000),
+      rate: numberSchema.required().min(1000).max(2000),
       phoneNumber: phoneNumberSchema.required(),
       role: stringSchema.label("Role").trim().valid("therapist").required(),
       educationDegree: stringSchema.label("Education Degree").trim().required(),
       specialization: stringSchema.label("Specialization").trim().required(),
-      yearsOfExperience: yearsOfExperienceSchema.required(),
+      yearsOfExperience: numberSchema.required().min(1).max(40),
     }),
     otherwise: Joi.object({
       ...baseSignupFields,
       email: emailSchema.required(),
       phoneNumber: phoneNumberSchema.required(),
       role: stringSchema.label("Role").trim().valid("patient").required(),
-      // blocking patients from entering these data
+      age: numberSchema.label("Age").integer().min(10).max(80).required(),
+      issues: stringSchema.label("Issues").trim().optional(),
       educationDegree: Joi.forbidden(),
       specialization: Joi.forbidden(),
       yearsOfExperience: Joi.forbidden(),
