@@ -18,7 +18,10 @@ export interface RequestConsultationInterface {
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-  patient?: Pick<PatientInterface, "id" | "name" | "language"> & {
+  patient?: Pick<
+    PatientInterface,
+    "id" | "name" | "age" | "issues" | "language"
+  > & {
     user?: Pick<UserInterface, "email" | "phoneNumber">;
   };
   therapist?: Pick<

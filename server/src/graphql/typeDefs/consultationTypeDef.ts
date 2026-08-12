@@ -20,6 +20,8 @@ export const consultationDefs: DocumentNode = gql`
   type ConsultationPatient {
     id: Int
     name: String
+    age: Int
+    issues: String
     language: String
     user: User
   }
