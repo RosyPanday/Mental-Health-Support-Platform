@@ -56,7 +56,7 @@ export class ConsultationService {
           : {
               model: Model.Patient,
               as: "patient",
-              attributes: ["id", "name", "language"],
+              attributes: ["id", "name", "age", "issues", "language"],
               include: [
                 {
                   model: Model.User,
