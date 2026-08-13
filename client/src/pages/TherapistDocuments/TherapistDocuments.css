@@ -1,0 +1,332 @@
+.therapist-documents__overview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 22px;
+  padding: 20px 23px;
+  border: 1px solid #d7e5e3;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.therapist-documents__progress-copy {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 13px;
+}
+
+.therapist-documents__overview-icon {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #e7f1ef;
+  color: #2f6f70;
+}
+
+.therapist-documents__progress-copy p {
+  margin: 0 0 3px;
+  color: #738587;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.therapist-documents__progress-copy strong {
+  color: #244d50;
+  font-size: 15px;
+}
+
+.therapist-documents__progress {
+  width: min(390px, 45%);
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e9efee;
+}
+
+.therapist-documents__progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3b8381, #61a09a);
+  transition: width 220ms ease;
+}
+
+.therapist-documents__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.therapist-documents__file {
+  min-height: 260px;
+  padding: 25px;
+  border: 1px solid #d8e5e3;
+  border-radius: 21px;
+  background: #fff;
+  box-shadow: 0 10px 27px rgba(28, 68, 71, 0.045);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.therapist-documents__file:hover {
+  transform: translateY(-2px);
+  border-color: #abc9c6;
+  box-shadow: 0 15px 31px rgba(28, 68, 71, 0.075);
+}
+
+.therapist-documents__file--selected {
+  border-color: #a8c9c5;
+  background: linear-gradient(145deg, #fff, #f6faf9);
+}
+
+.therapist-documents__file--invalid {
+  border-color: #df9c94;
+  background: #fffafa;
+}
+
+.therapist-documents__file-top {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 13px;
+}
+
+.therapist-documents__file-number {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #ecf3f2;
+  color: #3d7171;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.therapist-documents__file--selected .therapist-documents__file-number {
+  background: #2f6f70;
+  color: #fff;
+}
+
+.therapist-documents__file-number svg {
+  width: 17px;
+  height: 17px;
+}
+
+.therapist-documents__file h2 {
+  margin: 1px 0 6px;
+  color: #21474b;
+  font-size: 16px;
+}
+
+.therapist-documents__file-top p {
+  margin: 0;
+  color: #748588;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.therapist-documents__picker {
+  display: flex;
+  min-height: 93px;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px dashed #b7cdcb;
+  border-radius: 15px;
+  background: #f7faf9;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.therapist-documents__picker:hover,
+.therapist-documents__picker:focus-within {
+  border-color: #6c9e9b;
+  background: #eef6f4;
+}
+
+.therapist-documents__picker:focus-within {
+  outline: 3px solid rgba(47, 111, 112, 0.17);
+  outline-offset: 2px;
+}
+
+.therapist-documents__picker > span:first-child {
+  display: inline-flex;
+  width: 39px;
+  height: 39px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #fff;
+  color: #2f6f70;
+  box-shadow: 0 5px 13px rgba(28, 68, 71, 0.07);
+}
+
+.therapist-documents__picker-copy {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.therapist-documents__picker-copy strong {
+  overflow: hidden;
+  color: #285357;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.therapist-documents__picker-copy small {
+  color: #819093;
+  font-size: 12px;
+}
+
+.therapist-documents__picker input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.therapist-documents__field-error {
+  margin: 10px 0 0;
+  color: #a3443c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.therapist-documents__submit-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 22px;
+  padding: 27px 29px;
+  border-radius: 20px;
+  background: linear-gradient(140deg, #285e61, #1d464a);
+  color: #fff;
+}
+
+.therapist-documents__submit-panel p {
+  margin: 0 0 6px;
+  color: #bcd8d5;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.therapist-documents__submit-panel h2 {
+  margin: 0;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.therapist-documents__submit-panel div > span {
+  display: block;
+  margin-top: 7px;
+  color: #c9dcda;
+  font-size: 14px;
+}
+
+.therapist-documents__submit-panel button {
+  display: inline-flex;
+  min-height: 47px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #23575a;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.therapist-documents__submit-panel button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.therapist-documents__submit-panel button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.42);
+  outline-offset: 3px;
+}
+
+.therapist-documents__messages:empty {
+  display: none;
+}
+
+.therapist-documents__message {
+  margin: 16px 0 0;
+  padding: 13px 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.therapist-documents__message--error {
+  border: 1px solid #efd6d1;
+  background: #fff5f3;
+  color: #914b42;
+}
+
+.therapist-documents__message--success {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #cbe2da;
+  background: #eef8f4;
+  color: #2f6c58;
+}
+
+.therapist-documents__message--success svg {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 760px) {
+  .therapist-documents__overview,
+  .therapist-documents__submit-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .therapist-documents__progress {
+    width: 100%;
+  }
+
+  .therapist-documents__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .therapist-documents__submit-panel button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .therapist-documents__file {
+    padding: 20px;
+  }
+
+  .therapist-documents__submit-panel {
+    padding: 24px 20px;
+  }
+}
