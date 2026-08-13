@@ -2,7 +2,7 @@ export class TfIdfService {
   private constructor() {}
   public static tokenize(text: string): string[] {
     if (!text) {
-      throw new Error("Input Text cannot be empty");
+      return [];
     }
     const stopWords = [
       "the",

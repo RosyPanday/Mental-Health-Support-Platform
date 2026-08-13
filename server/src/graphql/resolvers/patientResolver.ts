@@ -33,7 +33,7 @@ export const PatientResolver = {
           args.input.description,
         );
 
-      const recommendedTherapists: TherapistInterface[] = results.map(
+      const recommendedTherapists: TherapistInterface[]|null = results.map(
         (result) => result.therapist,
       );
 
