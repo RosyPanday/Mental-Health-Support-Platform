@@ -113,7 +113,7 @@ export class AuthService {
       },
       jwtSecret,
       {
-        expiresIn: "1d", // Token expiration time setup
+        expiresIn: "2h", // Token expiration time setup
       },
     );
     return { token: token, userId: userId! };
@@ -147,7 +147,7 @@ export class AuthService {
       },
       jwtSecret,
       {
-        expiresIn: "1d",
+        expiresIn: "2h",
       },
     );
     return { token, userId: existingUser.id };

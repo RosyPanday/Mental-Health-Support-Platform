@@ -32,15 +32,21 @@ export class PatientService {
         },
         raw: true,
       });
-    const prevTimeMs = new Date(previousConsultations.preferredTime).getTime();
     const newTimeMs = new Date(preferredTime).getTime();
 
     const ONE_HOUR_MS = 60 * 60 * 1000;
-    if (Math.abs(prevTimeMs - newTimeMs) < ONE_HOUR_MS) {
-      throw new Error(
-        "You cannot request a consultaion within one hour of your already pending/confirmed consultations",
-      );
+    if (previousConsultations) {
+      const prevTimeMs = new Date(
+        previousConsultations.preferredTime,
+      ).getTime();
+
+      if (Math.abs(prevTimeMs - newTimeMs) < ONE_HOUR_MS) {
+        throw new Error(
+          "You cannot request a consultaion within one hour of your already pending/confirmed consultations",
+        );
+      }
     }
+
     await this.requestConsultationsRepository.create({
       patientId: patientId,
       therapistId,

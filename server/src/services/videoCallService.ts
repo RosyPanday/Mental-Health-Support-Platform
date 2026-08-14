@@ -1,6 +1,5 @@
 import { CallStatusEnum } from "#src/enums/callStatusEnum.js";
 import { RequestConsultationStatusEnum } from "#src/enums/requestConsultationStatusEnum.js";
-import type { RoleEnum } from "#src/enums/roleEnum.js";
 import { PaymentRepository } from "#src/repositories/paymentRepository.js";
 import { RequestConsultationRepository } from "#src/repositories/requestConsultationRepository.js";
 
@@ -33,10 +32,16 @@ export class VideoCallService {
       raw: true,
     });
 
-    if (payment.status !== "PAID") {
-      throw new Error(
-        "You cannot join the sesson without first paying for the session.",
-      );
+    if (payment) {
+      if (payment.status !== "PAID") {
+        throw new Error(
+          "You cannot join the sesson without first paying for the session.",
+        );
+      }
+    }
+   
+    if(!payment){
+      throw new Error("You can not join this session without first paying for it.");
     }
     //checking time
     const preferredTimeMs = new Date(consultation.preferredTime).getTime();
