@@ -1,0 +1,430 @@
+:root {
+  --primary-sage: #4a7c59;
+  --primary-sage-hover: #3b6447;
+  --accent-teal: #68b0ab;
+  --bg-gradient-start: #f4f8f6;
+  --bg-gradient-end: #eaf2ee;
+  --card-bg: #ffffff;
+  --text-main: #2d3748;
+  --text-muted: #718096;
+  --border-light: #e2e8f0;
+  --border-accent: #c6e0d4;
+  --shadow-subtle: 0 4px 12px rgba(74, 124, 89, 0.05);
+  --shadow-hover: 0 10px 25px rgba(74, 124, 89, 0.12);
+}
+
+.admin-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.admin-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 6px;
+  color: var(--primary-sage);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-header .subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.pending-badge {
+  background: #eef6f2;
+  color: var(--primary-sage);
+  border: 1px solid var(--border-accent);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* =========================
+   ALERTS & MESSAGES
+========================= */
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+.alert-success {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.alert-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.alert-icon {
+  font-weight: bold;
+}
+
+/* =========================
+   THERAPIST CARD & PROFILE PIC
+========================= */
+
+.therapists-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.therapist-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(198, 224, 212, 0.6);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.25s ease;
+}
+
+.therapist-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-accent);
+}
+
+.therapist-header {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+/* Circular Profile Picture */
+.therapist-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f0f7f4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.therapist-info {
+  flex: 1;
+}
+
+.therapist-info h2 {
+  margin: 0 0 6px;
+  color: #1a365d;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.specialization-tag {
+  display: inline-block;
+  background: #f0f7f4;
+  color: var(--primary-sage);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.detail-value {
+  font-size: 16px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* =========================
+   DOCUMENTS SECTION
+========================= */
+
+.documents-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.documents-section h3 {
+  margin: 0 0 16px;
+  font-size: 16px;
+  color: var(--primary-sage);
+  font-weight: 600;
+}
+
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.document-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doc-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Container box: Square 1:1 ratio */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  background: #f8fafc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Forces document images to scale down cleanly and fit inside the square box */
+.image-wrapper img,
+.document-image {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important; /* Fits entire document visible inside without cropping */
+  border-radius: 0 !important;
+  padding: 8px !important;       /* Inner margin keeps text/borders away from edges */
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(45, 55, 72, 0.65);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.image-wrapper:hover .preview-overlay {
+  opacity: 1;
+}
+
+.image-wrapper:hover img,
+.image-wrapper:hover .document-image {
+  transform: scale(1.03);
+}
+
+/* =========================
+   BUTTONS & ACTIONS
+========================= */
+
+.card-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.verify-btn-inline {
+  margin-top: 18px;
+  align-self: flex-start;
+}
+
+.verify-btn {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-sage);
+  color: white;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.verify-btn:hover {
+  background: var(--primary-sage-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(74, 124, 89, 0.2);
+}
+
+.verify-btn:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   MODAL & STATES
+========================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 85vh;
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  border: 1px dashed var(--border-accent);
+}
+
+.empty-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   RESPONSIVE (MOBILE)
+========================= */
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 20px 16px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .therapist-card {
+    padding: 20px;
+  }
+
+  .therapist-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .documents-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    justify-content: center;
+  }
+
+  .verify-btn {
+    width: auto;
+    padding: 9px 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
