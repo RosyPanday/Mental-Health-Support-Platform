@@ -311,6 +311,17 @@
   font-size: 14px;
 }
 
+.booking-detail__match-score {
+  margin-left: auto;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #e8f2eb;
+  color: #39745f;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .booking-detail__therapist dl {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -13,8 +13,13 @@ export const PatientDefs: DocumentNode = gql`
     therapistId: Int!
   }
 
+  type RecommendedTherapist {
+    therapist: Therapist!
+    similarityPercentage: Float!
+  }
+
   type RecommendedTherapistsData {
-    recommendedTherapists: [Therapist!]
+    recommendedTherapists: [RecommendedTherapist!]
   }
 
   type TherapistRecommendationResponse {

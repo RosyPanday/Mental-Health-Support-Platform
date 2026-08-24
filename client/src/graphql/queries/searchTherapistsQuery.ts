@@ -12,6 +12,10 @@ data{
 
 recommendedTherapists{
 
+similarityPercentage
+
+therapist{
+
 id
 
 name
@@ -31,6 +35,8 @@ language
 role
 
 profilePic
+
+}
 
 }
 

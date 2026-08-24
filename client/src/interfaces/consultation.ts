@@ -1,6 +1,11 @@
 import type { ConsultationStatus } from "../types/consultation";
 
 export interface TherapistRecommendation {
+  therapist: Therapist;
+  similarityPercentage: number;
+}
+
+export interface Therapist {
   id: number;
   name: string;
   specialization: string;

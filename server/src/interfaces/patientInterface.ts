@@ -11,7 +11,10 @@ export interface PatientInterface {
 }
 
 export interface therapistRecommendationInterface {
-  recommendedTherapists: TherapistInterface[]|null;
+  recommendedTherapists: Array<{
+    therapist: TherapistInterface;
+    similarityPercentage: number;
+  }> | null;
 }
 
 export interface PatientModelInterface

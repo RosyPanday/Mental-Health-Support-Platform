@@ -98,11 +98,11 @@ export default function BookConsultation() {
     try {
       setApiError("");
       await requestConsultation(
-        selectedTherapist.id,
+        selectedTherapist.therapist.id,
         new Date(values.preferredTime).toISOString(),
       );
       setSuccess(
-        `Your consultation request with ${selectedTherapist.name} has been sent.`,
+        `Your consultation request with ${selectedTherapist.therapist.name} has been sent.`,
       );
       setSelectedTherapist(null);
       resetSchedule({ preferredTime: "" });
@@ -211,19 +211,21 @@ export default function BookConsultation() {
             ) : (
               <div className="booking-detail__therapist-grid">
                 {therapists.map((therapist) => {
-                  const isSelected = selectedTherapist?.id === therapist.id;
+                  const { therapist: profile, similarityPercentage } = therapist;
+                  const isSelected = selectedTherapist?.therapist.id === profile.id;
                   return (
-                    <article className={`booking-detail__therapist${isSelected ? " booking-detail__therapist--selected" : ""}`} key={therapist.id}>
+                    <article className={`booking-detail__therapist${isSelected ? " booking-detail__therapist--selected" : ""}`} key={profile.id}>
                       <div className="booking-detail__therapist-header">
-                        <img src={getProfileUrl(therapist.profilePic)} alt={therapist.name} />
+                        <img src={getProfileUrl(profile.profilePic)} alt={profile.name} />
                         <div>
-                          <h3>{therapist.name}</h3>
-                          <p>{therapist.specialization || "Mental health therapist"}</p>
+                          <h3>{profile.name}</h3>
+                          <p>{profile.specialization || "Mental health therapist"}</p>
                         </div>
+                        <span className="booking-detail__match-score">{similarityPercentage}% match</span>
                       </div>
                       <dl>
-                        <div><dt>Experience</dt><dd>{therapist.yearsOfExperience} years</dd></div>
-                        <div><dt>Language</dt><dd>{therapist.language || "Not provided"}</dd></div>
+                        <div><dt>Experience</dt><dd>{profile.yearsOfExperience} years</dd></div>
+                        <div><dt>Language</dt><dd>{profile.language || "Not provided"}</dd></div>
                       </dl>
                       <button type="button" onClick={() => selectTherapist(therapist)}>
                         {isSelected ? "Selected" : "Choose therapist"}
@@ -240,11 +242,11 @@ export default function BookConsultation() {
         {selectedTherapist && (
           <section className="booking-detail__schedule" aria-labelledby="schedule-title">
             <div className="booking-detail__schedule-person">
-              <img src={getProfileUrl(selectedTherapist.profilePic)} alt="" />
+              <img src={getProfileUrl(selectedTherapist.therapist.profilePic)} alt="" />
               <div>
                 <p className="patient-page-eyebrow">Your selection</p>
-                <h2 id="schedule-title">Request a time with {selectedTherapist.name}</h2>
-                <span>{selectedTherapist.specialization} · {selectedTherapist.language}</span>
+                <h2 id="schedule-title">Request a time with {selectedTherapist.therapist.name}</h2>
+                <span>{selectedTherapist.therapist.specialization} · {selectedTherapist.therapist.language}</span>
               </div>
             </div>
             <form
