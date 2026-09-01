@@ -1,4 +1,4 @@
-import type { RoleEnum } from "@src/enums/roleEnum.js";
+import type { RoleEnum } from "#src/enums/roleEnum.js";
 
 export interface InputSignupInterface {
   id?: number;
