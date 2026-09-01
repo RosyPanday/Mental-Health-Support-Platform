@@ -1,6 +1,6 @@
 import type { GraphQLRequest } from "../interfaces/api";
 
-const GRAPHQL_URL =
+const GRAPHQL_URL =import.meta.env.VITE_GRAPHQL_URI ||
 "http://localhost:3001/graphql";
 
 
