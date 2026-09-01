@@ -1,0 +1,527 @@
+.consultation-detail--therapist {
+  width: min(1080px, calc(100% - 48px));
+}
+
+.consultation-detail__tabs {
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 25px;
+  padding: 5px;
+  border: 1px solid #d8e5dd;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.consultation-detail__tabs a {
+  padding: 9px 16px;
+  border-radius: 999px;
+  color: #667970;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.consultation-detail__tabs .consultation-detail__tab--active {
+  background: #39745f;
+  color: #fff;
+}
+
+.therapist-shell .consultation-detail__tabs {
+  border-color: #d4e3e1;
+}
+
+.therapist-shell .consultation-detail__tabs .consultation-detail__tab--active {
+  background: #2f6f70;
+}
+
+.therapist-shell .consultation-detail__card {
+  border-color: #d7e5e3;
+  box-shadow: 0 12px 32px rgba(27, 67, 70, 0.055);
+}
+
+.therapist-shell .consultation-detail__patient-avatar {
+  background: #e7f1ef;
+  color: #2f6f70;
+}
+
+.therapist-shell .consultation-detail__join,
+.therapist-shell .consultation-detail__empty a,
+.therapist-shell .consultation-detail__empty button,
+.therapist-shell .consultation-detail__cancel-form button {
+  background: #2f6f70;
+}
+
+.consultation-detail__list {
+  display: grid;
+  gap: 20px;
+}
+
+.consultation-detail__card {
+  padding: 28px;
+  border: 1px solid #d9e6de;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(34, 77, 60, 0.055);
+}
+
+.consultation-detail__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.consultation-detail__person {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 15px;
+}
+
+.consultation-detail__person img,
+.consultation-detail__patient-avatar {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 auto;
+  border: 3px solid #edf5f0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.consultation-detail__patient-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e9f3ed;
+  color: #39745f;
+  font-weight: 700;
+}
+
+.consultation-detail__name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.consultation-detail__person h2 {
+  margin: 0;
+  color: #214437;
+  font-size: 16px;
+}
+
+.consultation-detail__person p {
+  margin: 5px 0 0;
+  color: #71827a;
+  font-size: 14px;
+}
+
+.consultation-detail__verified {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #e8f4ec;
+  color: #327052;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.consultation-detail__status,
+.consultation-detail__payment-status {
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.consultation-detail__status--pending {
+  background: #fbf3dd;
+  color: #8a681d;
+}
+
+.consultation-detail__status--confirmed {
+  background: #e6f4ea;
+  color: #2f7050;
+}
+
+.consultation-detail__status--cancelled {
+  background: #f5ebe8;
+  color: #925c4f;
+}
+
+.consultation-detail__schedule-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 23px;
+  padding: 15px;
+  border-radius: 14px;
+  background: #f4f8f5;
+}
+
+.consultation-detail__schedule-row > span {
+  display: inline-flex;
+  color: #39745f;
+}
+
+.consultation-detail__schedule-row > div {
+  display: grid;
+  gap: 2px;
+}
+
+.consultation-detail__schedule-row small,
+.consultation-detail__facts dt,
+.consultation-detail__section-label,
+.consultation-detail__contact small {
+  color: #82928a;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.consultation-detail__schedule-row strong {
+  color: #325448;
+  font-size: 14px;
+}
+
+.consultation-detail__schedule-row > small {
+  text-transform: none;
+}
+
+.consultation-detail__facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  margin: 21px 0 0;
+}
+
+.consultation-detail__facts > div {
+  display: grid;
+  gap: 4px;
+  padding-left: 13px;
+  border-left: 2px solid #e2ece6;
+}
+
+.consultation-detail__facts dd {
+  margin: 0;
+  color: #35574b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.consultation-detail__confirmed-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 14px;
+  margin-top: 23px;
+  padding-top: 22px;
+  border-top: 1px solid #e4ece7;
+}
+
+.consultation-detail__confirmed-grid section {
+  padding: 17px;
+  border: 1px solid #e1eae5;
+  border-radius: 14px;
+  background: #fbfdfb;
+}
+
+.consultation-detail__section-label {
+  margin: 0 0 11px;
+  color: #4a7161;
+}
+
+.consultation-detail__contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+
+.consultation-detail__contact span {
+  display: grid;
+  gap: 4px;
+}
+
+.consultation-detail__contact strong {
+  overflow-wrap: anywhere;
+  color: #38594d;
+  font-size: 13px;
+}
+
+.consultation-detail__payment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.consultation-detail__payment p {
+  margin: 0;
+  color: #71827a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.consultation-detail__payment-status--pending {
+  background: #fbf3dd;
+  color: #8a681d;
+}
+
+.consultation-detail__payment-status--completed,
+.consultation-detail__payment-status--paid {
+  background: #e6f4ea;
+  color: #2f7050;
+}
+
+.consultation-detail__reason {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid #eadbd5;
+  border-radius: 14px;
+  background: #fcf8f6;
+}
+
+.consultation-detail__reason > span {
+  display: inline-flex;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f2e7e2;
+  color: #8c5e50;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.consultation-detail__reason strong {
+  color: #704d42;
+  font-size: 14px;
+}
+
+.consultation-detail__reason p {
+  margin: 4px 0 0;
+  color: #7d655d;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.consultation-detail__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 21px;
+}
+
+.consultation-detail__actions button,
+.consultation-detail__empty button,
+.consultation-detail__empty a,
+.consultation-detail__cancel-form button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 17px;
+  border: 0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.consultation-detail__join,
+.consultation-detail__empty a,
+.consultation-detail__empty button {
+  background: #39745f;
+  color: #fff;
+}
+
+.consultation-detail__pay {
+  background: #6f3dad;
+  color: #fff;
+}
+
+.consultation-detail__secondary {
+  border: 1px solid #cbdcd2 !important;
+  background: #fff;
+  color: #47695b;
+}
+
+.consultation-detail__actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.consultation-detail__action-error {
+  margin: 13px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff4f3;
+  color: #9b463e;
+  font-size: 13px;
+}
+
+.consultation-detail__cancel-form {
+  margin-top: 17px;
+  padding: 17px;
+  border-radius: 14px;
+  background: #f5f8f6;
+}
+
+.consultation-detail__cancel-form label {
+  display: block;
+  margin-bottom: 7px;
+  color: #35574b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.consultation-detail__cancel-form textarea {
+  width: 100%;
+  min-height: 85px;
+  padding: 11px;
+  border: 1px solid #ccdcd2;
+  border-radius: 10px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.consultation-detail__cancel-form textarea[aria-invalid="true"] {
+  border-color: #c75f56;
+  background: #fffafa;
+}
+
+.consultation-detail__field-error {
+  margin: 7px 0 0;
+  color: #a3443c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.consultation-detail__cancel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.consultation-detail__cancel-form button {
+  margin-top: 9px;
+  background: #39745f;
+  color: #fff;
+}
+
+.consultation-detail__loading,
+.consultation-detail__empty {
+  display: flex;
+  min-height: 330px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px;
+  border: 1px dashed #cadbd1;
+  border-radius: 22px;
+  background: #fff;
+  text-align: center;
+}
+
+.consultation-detail__loading > span {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #d5e4db;
+  border-top-color: #39745f;
+  border-radius: 50%;
+  animation: consultation-spin 700ms linear infinite;
+}
+
+.consultation-detail__loading strong,
+.consultation-detail__empty h2 {
+  margin: 17px 0 7px;
+  color: #294c3f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.consultation-detail__loading p,
+.consultation-detail__empty p {
+  max-width: 500px;
+  margin: 0 0 17px;
+  color: #74857d;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.consultation-detail__empty > span {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eaf3ed;
+  color: #39745f;
+}
+
+@keyframes consultation-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 700px) {
+  .consultation-detail__tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  .consultation-detail__tabs a {
+    text-align: center;
+  }
+
+  .consultation-detail__card {
+    padding: 21px 17px;
+  }
+
+  .consultation-detail__card-top {
+    align-items: flex-start;
+  }
+
+  .consultation-detail__person img,
+  .consultation-detail__patient-avatar {
+    width: 52px;
+    height: 52px;
+  }
+
+  .consultation-detail__schedule-row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .consultation-detail__schedule-row > small {
+    grid-column: 2;
+  }
+
+  .consultation-detail__facts,
+  .consultation-detail__confirmed-grid,
+  .consultation-detail__contact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .consultation-detail__confirmed-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consultation-detail__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .consultation-detail__actions button {
+    width: 100%;
+  }
+}

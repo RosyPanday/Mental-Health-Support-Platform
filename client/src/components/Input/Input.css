@@ -1,0 +1,41 @@
+.inputGroup{
+
+display:flex;
+
+flex-direction:column;
+
+margin-bottom:18px;
+
+}
+
+.inputGroup label{
+
+margin-bottom:8px;
+
+font-weight:500;
+
+}
+
+.inputGroup input{
+
+padding:12px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+font-size: 16px;
+
+}
+
+.inputGroup--invalid input {
+border-color:#c75f56;
+background:#fffafa;
+}
+
+.inputGroup__error {
+margin:7px 0 0;
+color:#a13e37;
+font-size:14px;
+line-height:1.45;
+}

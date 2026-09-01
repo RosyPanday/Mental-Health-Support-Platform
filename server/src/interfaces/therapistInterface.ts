@@ -4,17 +4,17 @@ export interface TherapistInterface {
   id: number;
   userId: number;
   name: string;
-  educationDegree: string;
-  specialization: string;
-  yearsOfExperience: number;
+  educationDegree?: string | undefined;
+  specialization?: string | undefined;
+  yearsOfExperience?: number | undefined;
   language: string;
   review: number;
   completedAppointments: number;
-  profilePic: string;
-  educationalDoc1: string;
-  educationalDoc2: string;
-  professionalDoc: string;
-  rate:number;
+  profilePic?: string | undefined;
+  educationalDoc1?: string | undefined;
+  educationalDoc2?: string | undefined;
+  professionalDoc?: string | undefined;
+  rate?: number;
   isVerified: boolean;
 }
 

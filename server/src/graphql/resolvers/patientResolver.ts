@@ -2,7 +2,6 @@ import { RoleEnum } from "#src/enums/roleEnum.js";
 import type { ContextInterface } from "#src/interfaces/contextHandlerInterface.js";
 import type { GraphqlResponseInterface } from "#src/interfaces/graphqlResponseInterface.js";
 import type { therapistRecommendationInterface } from "#src/interfaces/patientInterface.js";
-import type { TherapistInterface } from "#src/interfaces/therapistInterface.js";
 import { Validator } from "#src/middleware/validator.js";
 import { PatientService } from "#src/services/patientService.js";
 import { TherapistRecommendationService } from "#src/services/therapistRecommendationService.js";
@@ -33,8 +32,11 @@ export const PatientResolver = {
           args.input.description,
         );
 
-      const recommendedTherapists: TherapistInterface[] = results.map(
-        (result) => result.therapist,
+      const recommendedTherapists = results.map(
+        ({ therapist, similarityPercentage }) => ({
+          therapist,
+          similarityPercentage,
+        }),
       );
 
       return GraphqlResponse.send<therapistRecommendationInterface>({

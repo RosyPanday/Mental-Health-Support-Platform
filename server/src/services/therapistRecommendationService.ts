@@ -45,10 +45,12 @@ export class TherapistRecommendationService {
 
       return {
         therapist,
-        similarity: Number(similarity.toFixed(3)),
+        similarityPercentage: Number((similarity * 100).toFixed(1)),
       };
     });
 
-    return results.sort((a, b) => b.similarity - a.similarity).slice(0, 5);
+    return results
+      .sort((a, b) => b.similarityPercentage - a.similarityPercentage)
+      .slice(0, 5);
   }
 }
