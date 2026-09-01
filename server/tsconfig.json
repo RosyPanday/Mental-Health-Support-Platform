@@ -6,7 +6,7 @@
     "outDir": "./dist",
     "allowJs": true,
     "paths": {
-      "@src/*": ["./src/*"],
+      "#src/*": ["./src/*"],
      },
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
