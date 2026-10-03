@@ -22,7 +22,7 @@ export class TfIdfService {
 
     return text
       .toLowerCase()
-      .replace(/[^a-z\s]/g, "")
+      .replace(/[^a-z\s]/g, " ")
       .split(/\s+/)
       .filter((word) => word.length > 0 && !stopWords.includes(word));
   }
