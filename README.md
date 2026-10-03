@@ -13,12 +13,9 @@ api: rest api for uploading files + graphql api
 **PHQ9 screening**: for patients for depression screening
 **file uploads** : using multer and save in server for verifying therapists crendentials
 **Therapist recommendation enginer**: top ranked therapists are recommended using TF IDF algorithm 
+**Appointment booking and management**: therapists can be requested and therapists can decide the session to be cancelled/confirmed
+**payment gateway**: khalti payment gatewayt o pay for  a session
 
-### Upcoming
-- Appointment booking and management
-- booking consultations
-
----
 
 ## 🛠️ Tech Stack
 
@@ -28,6 +25,20 @@ api: rest api for uploading files + graphql api
 - **Authentication**: JWT, Bcrypt
 -**file upload** :multer
 ---
+
+## demo users
+client:
+   username:democlient
+   password:democlient@1
+
+therapist:
+   username: demotherapist
+   password: demotherapist@1
+
+admin:
+   username: demoadmin
+   password: demoadmin@1
+
 
 ## ⚙️ Getting Started
 
