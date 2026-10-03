@@ -57,6 +57,8 @@ token:string
 
 )=>{
 
+localStorage.removeItem("token");
+localStorage.removeItem("user");
 
 localStorage.setItem(
 
